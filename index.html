@@ -882,7 +882,7 @@
             <div class="grade">Grado: 11° A</div>
             <div class="event">Feria Científica 2026</div>
             <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">
-                Proyecto: Sistema de visualización vibracional para la detección de alteraciones estructurales mediante figuras de Chladni.
+                Proyecto: Influencia de la frecuencia de excitación en la formación de figuras de Chladni.
             </p>
         </div>
     </section>
@@ -1089,13 +1089,18 @@
                 // Amplitud compartida para que ambas ondas tengan la misma forma
                 let amp = 20 + Math.sin(y * 0.01 + time) * 15 + Math.sin(y * 0.02 + time * 0.5) * 5;
                 
+                // Calculamos cuántos cuadraditos caben en la amplitud actual (enteros exactos)
+                let numBlocks = Math.floor(amp / gridSize);
+                
                 // Onda izquierda (picos hacia la derecha)
-                for (let x = 0; x < amp; x += gridSize) {
+                for (let i = 0; i < numBlocks; i++) {
+                    let x = i * gridSize; // Coordenada entera exacta
                     ctxLeft.fillRect(x, y, gridSize - 1, gridSize - 1);
                 }
                 
                 // Onda derecha (picos hacia la izquierda - espejo exacto)
-                for (let x = waveWidth - amp; x < waveWidth; x += gridSize) {
+                for (let i = 0; i < numBlocks; i++) {
+                    let x = waveWidth - (i + 1) * gridSize; // Coordenada entera exacta desde la derecha
                     ctxRight.fillRect(x, y, gridSize - 1, gridSize - 1);
                 }
             }
