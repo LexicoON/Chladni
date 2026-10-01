@@ -38,7 +38,7 @@
             top: 0;
             height: 100vh;
             width: 80px;
-            z-index: 0; /* Asegurar que está detrás del contenido */
+            z-index: 0;
             pointer-events: none;
         }
         .wave-canvas.left { left: 0; }
@@ -91,7 +91,6 @@
             color: var(--secondary);
         }
 
-        /* Menú Hamburguesa para móvil */
         .menu-toggle {
             display: none;
             background: none;
@@ -102,7 +101,7 @@
             z-index: 1001;
         }
 
-        /* Hero Section con imagen de fondo desde URL */
+        /* Hero Section */
         header {
             height: 100vh;
             display: flex;
@@ -132,21 +131,31 @@
             position: relative;
             z-index: 2;
             padding: 0 1rem;
+            max-width: 900px;
         }
 
         header h1 {
             font-size: 4rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             animation: fadeInDown 1s ease;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .project-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.2s both;
+            line-height: 1.4;
         }
 
         header p {
             font-size: 1.2rem;
             color: var(--text);
             max-width: 700px;
-            margin-bottom: 2rem;
+            margin: 0 auto 2rem;
             animation: fadeInUp 1s ease 0.3s both;
         }
 
@@ -173,7 +182,7 @@
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
-            z-index: 2; /* Para que esté por encima de las ondas de fondo */
+            z-index: 2;
         }
 
         h2 {
@@ -250,7 +259,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem; /* Reducido porque ahora todo está en un solo grid */
         }
 
         /* Truco de padding-top para evitar bugs de carga en móvil */
@@ -262,6 +271,7 @@
             background: #eee;
             width: 100%;
             padding-top: 133%; /* Relación de aspecto 3:4 */
+            cursor: pointer;
         }
 
         .gallery-item img, .video-item video {
@@ -272,10 +282,10 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
-            display: block; /* Crucial para móvil */
+            display: block;
         }
 
-        .gallery-item:hover img {
+        .gallery-item:hover img, .video-item:hover video {
             transform: scale(1.05);
         }
 
@@ -339,12 +349,6 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        .team-card .info {
-            color: var(--text-light);
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
         }
 
         /* Tarjeta especial de Institución */
@@ -484,7 +488,7 @@
             align-items: center;
         }
 
-        .lightbox img {
+        .lightbox img, .lightbox video {
             max-width: 90%;
             max-height: 85%;
             border-radius: 10px;
@@ -521,7 +525,6 @@
             transform: translateY(0);
         }
 
-        /* Animaciones de entrada para el Hero */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -535,6 +538,7 @@
         /* --- RESPONSIVE (Móvil) --- */
         @media (max-width: 768px) {
             header h1 { font-size: 2.2rem; }
+            .project-subtitle { font-size: 1.1rem; }
             .nav-links { 
                 display: none; 
                 position: absolute;
@@ -552,13 +556,18 @@
             .menu-toggle {
                 display: block;
             }
-            .wave-canvas { width: 40px; } /* Ondas más delgadas en móvil */
+            .wave-canvas { width: 40px; }
             section { padding: 3rem 1rem; }
             
             /* Galería en 2 columnas en móvil */
             .gallery { 
                 grid-template-columns: repeat(2, 1fr); 
                 gap: 0.8rem;
+            }
+            
+            /* Hace que un elemento ocupe las 2 columnas en móvil */
+            .span-2-mobile {
+                grid-column: span 2;
             }
             
             /* Equipo en 2 columnas en móvil */
@@ -603,6 +612,7 @@
     <header id="inicio">
         <div class="hero-content">
             <h1>El Arte de las Ondas</h1>
+            <p class="project-subtitle">Influencia de la frecuencia de excitación en la formación de figuras de Chladni</p>
             <p>Descubre cómo el sonido y la vibración dan forma a patrones geométricos increíbles. Un proyecto de investigación sobre las Figuras de Chladni y las ondas estacionarias.</p>
             <a href="#definiciones" class="btn">Comenzar a Explorar</a>
         </div>
@@ -673,57 +683,55 @@
             Explora nuestro proceso, el prototipo y los patrones que logramos capturar.
         </p>
 
-        <!-- 1. Equipo -->
+        <!-- 1. Equipo (Imágenes y Videos juntos en un solo grid) -->
         <h3 class="gallery-title">👥 Nuestro Equipo en Acción</h3>
         <div class="gallery">
-            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo1.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo1.jpg', 'image')">
                 <img src="images/equipo/equipo1.jpg" alt="Equipo trabajando" loading="lazy">
                 <div class="gallery-caption">Trabajando en el montaje</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo2.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo2.jpg', 'image')">
                 <img src="images/equipo/equipo2.jpg" alt="Revisando el taladro" loading="lazy">
                 <div class="gallery-caption">Revisando el taladro</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo3.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo3.jpg', 'image')">
                 <img src="images/equipo/equipo3.jpg" alt="Cortando madera" loading="lazy">
                 <div class="gallery-caption">Cortando la base</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo4.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo4.jpg', 'image')">
                 <img src="images/equipo/equipo4.jpg" alt="Trabajando en la calle" loading="lazy">
                 <div class="gallery-caption">Ajustes finales en equipo</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo5.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo5.jpg', 'image')">
                 <img src="images/equipo/equipo5.jpg" alt="Manos serrando" loading="lazy">
                 <div class="gallery-caption">Detalle del corte</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo6.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo6.jpg', 'image')">
                 <img src="images/equipo/equipo6.jpg" alt="Cargando la madera" loading="lazy">
                 <div class="gallery-caption">Preparando los materiales</div>
             </div>
-        </div>
-
-        <!-- Videos del Equipo -->
-        <div class="gallery">
-            <div class="video-item">
-                <video controls loop muted playsinline>
+            
+            <!-- Videos del Equipo -->
+            <div class="video-item autoplay" onclick="openLightbox('videos/equipo1.mp4', 'video')">
+                <video loop muted playsinline>
                     <source src="videos/equipo1.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Trabajo en equipo (1)</div>
             </div>
-            <div class="video-item">
-                <video controls loop muted playsinline>
+            <div class="video-item autoplay" onclick="openLightbox('videos/equipo2.mp4', 'video')">
+                <video loop muted playsinline>
                     <source src="videos/equipo2.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Trabajo en equipo (2)</div>
             </div>
-            <div class="video-item">
-                <video controls loop muted playsinline>
+            <div class="video-item autoplay" onclick="openLightbox('videos/equipo3.mp4', 'video')">
+                <video loop muted playsinline>
                     <source src="videos/equipo3.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Trabajo en equipo (3)</div>
             </div>
-            <div class="video-item">
-                <video controls loop muted playsinline>
+            <div class="video-item autoplay" onclick="openLightbox('videos/equipo4.mp4', 'video')">
+                <video loop muted playsinline>
                     <source src="videos/equipo4.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Trabajo en equipo (4)</div>
@@ -733,39 +741,37 @@
         <!-- 2. Prototipo -->
         <h3 class="gallery-title">🔧 Construyendo el Prototipo</h3>
         <div class="gallery">
-            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo1.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo1.jpg', 'image')">
                 <img src="images/prototipo/prototipo1.jpg" alt="Armando subwoofer" loading="lazy">
                 <div class="gallery-caption">Ensamblando el subwoofer</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo2.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo2.jpg', 'image')">
                 <img src="images/prototipo/prototipo2.jpg" alt="Varilla roscada" loading="lazy">
                 <div class="gallery-caption">Varillas de sujeción</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo3.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo3.jpg', 'image')">
                 <img src="images/prototipo/prototipo3.jpg" alt="Tabla de madera" loading="lazy">
                 <div class="gallery-caption">Base de madera</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo4.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo4.jpg', 'image')">
                 <img src="images/prototipo/prototipo4.jpg" alt="Acrílico" loading="lazy">
                 <div class="gallery-caption">Lámina de acrílico</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo5.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo5.jpg', 'image')">
                 <img src="images/prototipo/prototipo5.jpg" alt="Guantes de trabajo" loading="lazy">
                 <div class="gallery-caption">Equipo de protección</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo6.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo6.jpg', 'image')">
                 <img src="images/prototipo/prototipo6.jpg" alt="Montaje lateral" loading="lazy">
                 <div class="gallery-caption">Montaje interno</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo7.jpg')">
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo7.jpg', 'image')">
                 <img src="images/prototipo/prototipo7.jpg" alt="Montaje completo" loading="lazy">
                 <div class="gallery-caption">Estructura ensamblada</div>
             </div>
-        </div>
-
-        <!-- Video del Prototipo (Autoplay) -->
-        <div class="gallery">
-            <div class="video-item autoplay">
+            
+            <!-- Video del Prototipo (span-2-mobile para móvil) -->
+            <div class="video-item autoplay span-2-mobile" onclick="openLightbox('videos/prototipo_final.mp4', 'video')">
                 <video loop muted playsinline>
                     <source src="videos/prototipo_final.mp4" type="video/mp4">
                 </video>
@@ -776,21 +782,19 @@
         <!-- 3. Resultados -->
         <h3 class="gallery-title">✨ Resultados y Patrones</h3>
         <div class="gallery">
-            <div class="gallery-item" onclick="openLightbox('images/resultados/resultado1.jpg')">
+            <div class="gallery-item span-2-mobile" onclick="openLightbox('images/resultados/resultado1.jpg', 'image')">
                 <img src="images/resultados/resultado1.jpg" alt="Placa metálica" loading="lazy">
                 <div class="gallery-caption">Placa lista para el experimento</div>
             </div>
-        </div>
-
-        <!-- Videos de Resultados (Autoplay) -->
-        <div class="gallery">
-            <div class="video-item autoplay">
+            
+            <!-- Videos de Resultados (Autoplay) -->
+            <div class="video-item autoplay" onclick="openLightbox('videos/resultado1.mp4', 'video')">
                 <video loop muted playsinline>
                     <source src="videos/resultado1.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Formación de patrón (1)</div>
             </div>
-            <div class="video-item autoplay">
+            <div class="video-item autoplay" onclick="openLightbox('videos/resultado2.mp4', 'video')">
                 <video loop muted playsinline>
                     <source src="videos/resultado2.mp4" type="video/mp4">
                 </video>
@@ -889,7 +893,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>Proyecto de Investigación: Sistema de visualización vibracional para la detección de alteraciones estructurales mediante figuras de Chladni.</p>
+        <p>Proyecto de Investigación: Influencia de la frecuencia de excitación en la formación de figuras de Chladni.</p>
         <p style="margin-top: 0.5rem;">&copy; 2026 - Todos los derechos reservados.</p>
     </footer>
 
@@ -913,10 +917,11 @@
         Tu navegador no soporta audio HTML5.
     </audio>
 
-    <!-- Lightbox para imágenes -->
+    <!-- Lightbox para imágenes y videos -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="close-lightbox">&times;</span>
         <img src="" alt="Imagen ampliada" id="lightbox-img">
+        <video id="lightbox-video" controls style="display:none;"></video>
     </div>
 
     <script>
@@ -942,14 +947,33 @@
             });
         });
 
-        // --- Lightbox para imágenes ---
-        function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox').classList.add('active');
+        // --- Lightbox para Imágenes y Videos ---
+        function openLightbox(src, type) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const video = document.getElementById('lightbox-video');
+            
+            if (type === 'video') {
+                img.style.display = 'none';
+                video.style.display = 'block';
+                video.src = src;
+                video.play();
+            } else {
+                video.pause();
+                video.src = '';
+                video.style.display = 'none';
+                img.style.display = 'block';
+                img.src = src;
+            }
+            lightbox.classList.add('active');
         }
 
         function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
+            const lightbox = document.getElementById('lightbox');
+            const video = document.getElementById('lightbox-video');
+            video.pause();
+            video.src = '';
+            lightbox.classList.remove('active');
         }
 
         document.addEventListener('keydown', (e) => {
@@ -1074,33 +1098,27 @@
         resizeCanvases();
 
         let time = 0;
-        const gridSize = 6; // Tamaño de los cuadraditos
+        const gridSize = 6; 
 
         function drawWaves() {
-            time += 0.008; // Velocidad reducida para efecto relajante
+            time += 0.008; 
             ctxLeft.clearRect(0, 0, waveWidth, waveHeight);
             ctxRight.clearRect(0, 0, waveWidth, waveHeight);
 
-            // Color azul oscuro con transparencia para efecto sutil
             ctxLeft.fillStyle = 'rgba(44, 62, 80, 0.15)';
             ctxRight.fillStyle = 'rgba(44, 62, 80, 0.15)';
 
             for (let y = 0; y < waveHeight; y += gridSize) {
-                // Amplitud compartida para que ambas ondas tengan la misma forma
                 let amp = 20 + Math.sin(y * 0.01 + time) * 15 + Math.sin(y * 0.02 + time * 0.5) * 5;
-                
-                // Calculamos cuántos cuadraditos caben en la amplitud actual (enteros exactos)
                 let numBlocks = Math.floor(amp / gridSize);
                 
-                // Onda izquierda (picos hacia la derecha)
                 for (let i = 0; i < numBlocks; i++) {
-                    let x = i * gridSize; // Coordenada entera exacta
+                    let x = i * gridSize;
                     ctxLeft.fillRect(x, y, gridSize - 1, gridSize - 1);
                 }
                 
-                // Onda derecha (picos hacia la izquierda - espejo exacto)
                 for (let i = 0; i < numBlocks; i++) {
-                    let x = waveWidth - (i + 1) * gridSize; // Coordenada entera exacta desde la derecha
+                    let x = waveWidth - (i + 1) * gridSize;
                     ctxRight.fillRect(x, y, gridSize - 1, gridSize - 1);
                 }
             }
