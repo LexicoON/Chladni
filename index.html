@@ -95,7 +95,6 @@
         .gallery-title { margin: 2rem 0 1rem; color: var(--primary); font-size: 1.5rem; border-left: 5px solid var(--secondary); padding-left: 1rem; }
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
 
-        /* FIX: elementos que ocupan todo el ancho del grid (PC y móvil) */
         .span-full { grid-column: 1 / -1; }
 
         .gallery-item, .video-item {
@@ -116,7 +115,6 @@
             pointer-events: none;
         }
 
-        /* FIX: ícono de play en la esquina superior derecha */
         .play-badge {
             position: absolute; top: 10px; right: 10px;
             width: 32px; height: 32px; border-radius: 50%;
@@ -135,12 +133,33 @@
         .team-card h4 { color: var(--primary); margin-bottom: 0.25rem; font-size: 1rem; }
         .team-card .role { color: var(--secondary); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Institución (sin nombre del proyecto) */
+        /* Institución */
         .school-card { background: white; border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border-top: 5px solid var(--secondary); margin: 3rem auto 0; max-width: 600px; }
         .school-card h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
         .school-card .school-name { font-weight: 700; font-size: 1.2rem; color: var(--text); margin-bottom: 0.5rem; }
         .school-card .grade { color: var(--secondary); font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; }
         .school-card .event { color: var(--text-light); font-size: 0.95rem; }
+
+        /* Enlace a la feria */
+        .fair-cta { text-align: center; margin-top: 2.5rem; }
+        .btn-fair {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--secondary), #5DADE2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+        .btn-fair:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.6);
+        }
 
         /* Análisis */
         .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
@@ -171,11 +190,10 @@
         .close-lightbox { position: absolute; top: 20px; right: 30px; color: white; font-size: 2.5rem; cursor: pointer; transition: color 0.3s; }
         .close-lightbox:hover { color: var(--secondary); }
 
-        /* --- Animación Secciones --- */
+        /* --- Animaciones --- */
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
-        /* --- Animación Tarjetas (fade individual al hacer scroll) --- */
         .card-fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .card-fade.visible { opacity: 1; transform: translateY(0); }
 
@@ -199,6 +217,7 @@
             .team-card .role { font-size: 0.65rem; }
             .school-card { padding: 1.5rem; margin: 2rem 0 0; }
             .play-badge { width: 28px; height: 28px; font-size: 12px; }
+            .btn-fair { padding: 0.9rem 1.4rem; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -351,9 +370,9 @@
                 <div class="gallery-caption">Estructura ensamblada</div>
             </div>
             
-            <!-- Video del Prototipo (span-full: ocupa todo el ancho en PC y móvil) -->
-            <div class="video-item span-full" onclick="openLightbox('videos/prototipo_final.mp4', 'video')">
-                <video muted playsinline preload="metadata"><source src="videos/prototipo_final.mp4" type="video/mp4"></video>
+            <!-- Video PRIORITY: Proyecto casi terminado -->
+            <div class="video-item span-full priority" onclick="openLightbox('videos/prototipo_final.mp4', 'video')">
+                <video muted playsinline loop preload="metadata"><source src="videos/prototipo_final.mp4" type="video/mp4"></video>
                 <div class="play-badge">▶</div>
                 <div class="gallery-caption">Proyecto casi terminado</div>
             </div>
@@ -362,19 +381,19 @@
         <!-- 3. Resultados -->
         <h3 class="gallery-title">✨ Resultados y Patrones</h3>
         <div class="gallery">
-            <!-- Imagen Placa (span-full) -->
             <div class="gallery-item span-full" onclick="openLightbox('images/resultados/resultado1.jpg', 'image')">
                 <img src="images/resultados/resultado1.jpg" alt="Placa metálica" loading="lazy">
                 <div class="gallery-caption">Placa lista para el experimento</div>
             </div>
             
-            <div class="video-item" onclick="openLightbox('videos/resultado1.mp4', 'video')">
-                <video muted playsinline preload="metadata"><source src="videos/resultado1.mp4" type="video/mp4"></video>
+            <!-- Videos PRIORITY: Patrones -->
+            <div class="video-item priority" onclick="openLightbox('videos/resultado1.mp4', 'video')">
+                <video muted playsinline loop preload="metadata"><source src="videos/resultado1.mp4" type="video/mp4"></video>
                 <div class="play-badge">▶</div>
                 <div class="gallery-caption">Patrón 1</div>
             </div>
-            <div class="video-item" onclick="openLightbox('videos/resultado2.mp4', 'video')">
-                <video muted playsinline preload="metadata"><source src="videos/resultado2.mp4" type="video/mp4"></video>
+            <div class="video-item priority" onclick="openLightbox('videos/resultado2.mp4', 'video')">
+                <video muted playsinline loop preload="metadata"><source src="videos/resultado2.mp4" type="video/mp4"></video>
                 <div class="play-badge">▶</div>
                 <div class="gallery-caption">Patrón 2</div>
             </div>
@@ -432,7 +451,14 @@
             <h3>Información Institucional</h3>
             <div class="school-name">Colegio Nuestra Señora de Bethlem</div>
             <div class="grade">Grado: 11° A</div>
-            <div class="event">Feria Científica 2026</div>
+            <div class="event">Innovafest 2026</div>
+        </div>
+
+        <!-- Enlace a la feria -->
+        <div class="fair-cta">
+            <a href="https://vermillion-melomakarona-44b304.netlify.app/" target="_blank" rel="noopener" class="btn-fair">
+                🎪 Explora los demás stands en Innovafest 2026 →
+            </a>
         </div>
     </section>
 
@@ -502,7 +528,7 @@
         }
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
-        // --- Animaciones al hacer scroll (Secciones) ---
+        // --- Animaciones al hacer scroll ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -510,57 +536,126 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-        // --- FADE IN INDIVIDUAL DE TARJETAS (solo una vez) ---
+        // --- FADE IN INDIVIDUAL DE TARJETAS ---
         const cardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    cardObserver.unobserve(entry.target); // Solo una vez
+                    cardObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.gallery-item, .video-item, .team-card, .analysis-card, .accordion, .school-card').forEach((el, i) => {
             el.classList.add('card-fade');
-            // Delay escalonado para efecto cascada
             el.style.transitionDelay = `${(i % 6) * 0.08}s`;
             cardObserver.observe(el);
         });
 
-        // --- CONTROL DE VIDEOS: UNO A LA VEZ + AUTO-AVANCE ---
-        const allVideos = document.querySelectorAll('.video-item video');
+        // ============================================================
+        // SISTEMA DE VIDEOS
+        // ============================================================
+        // Regla: 
+        //  - Videos PRIORITY (prototipo_final, patrón 1, patrón 2): siempre se
+        //    reproducen en bucle cuando están en pantalla. No afectan a los demás.
+        //  - Videos REGULARES (trabajo 1-4): solo uno a la vez. Al terminar,
+        //    saltan al siguiente visible. Si no hay otro visible, se repite el mismo.
 
-        function playOnly(video) {
-            // Pausar todos los demás
-            allVideos.forEach(v => { if (v !== video) v.pause(); });
-            // Reproducir este
-            if (video.ended) video.currentTime = 0;
-            video.play().catch(e => console.log('Play error:', e));
-        }
+        const priorityItems = document.querySelectorAll('.video-item.priority');
+        const regularItems = document.querySelectorAll('.video-item:not(.priority)');
+        
+        const allPriorityVideos = Array.from(priorityItems).map(i => i.querySelector('video'));
+        const allRegularVideos = Array.from(regularItems).map(i => i.querySelector('video'));
 
-        const videoObserver = new IntersectionObserver((entries) => {
+        // --- PRIORITY VIDEOS: play cuando están en pantalla ---
+        const priorityObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const video = entry.target.querySelector('video');
                 if (!video) return;
                 if (entry.isIntersecting) {
-                    // Solo reproducir si no hay otro reproduciéndose actualmente
-                    const anyPlaying = Array.from(allVideos).some(v => !v.paused && v !== video);
-                    if (!anyPlaying) {
-                        playOnly(video);
-                    }
+                    video.play().catch(e => console.log('Priority play error:', e));
+                } else {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.4 });
+        priorityItems.forEach(item => priorityObserver.observe(item));
+
+        // --- REGULAR VIDEOS: uno a la vez, con ciclo continuo ---
+        let currentRegularVideo = null;
+
+        function playRegularVideo(video) {
+            if (currentRegularVideo === video && !video.paused) return;
+            // Pausar todos los demás
+            allRegularVideos.forEach(v => {
+                if (v !== video) { v.pause(); v.currentTime = 0; }
+            });
+            // Reproducir este
+            if (video.ended || video.currentTime >= video.duration - 0.1) {
+                video.currentTime = 0;
+            }
+            video.play().catch(e => console.log('Regular play error:', e));
+            currentRegularVideo = video;
+        }
+
+        function pauseAllRegular() {
+            allRegularVideos.forEach(v => { v.pause(); v.currentTime = 0; });
+            currentRegularVideo = null;
+        }
+
+        // Observer de los videos regulares
+        const regularObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target.querySelector('video');
+                if (!video) return;
+                
+                if (entry.isIntersecting) {
+                    // Solo reproducir si no hay uno reproduciéndose ya en otro lado
+                    // (para evitar que el scroll inicie varios a la vez)
+                    playRegularVideo(video);
+                } else if (currentRegularVideo === video) {
+                    // Si el que se estaba reproduciendo ya no se ve, pausar
+                    video.pause();
+                    currentRegularVideo = null;
+                    // Buscar otro video regular visible para continuar
+                    findAndPlayVisibleRegular();
                 }
             });
         }, { threshold: 0.6 });
+        regularItems.forEach(item => regularObserver.observe(item));
 
-        document.querySelectorAll('.video-item').forEach(item => videoObserver.observe(item));
-
-        // Auto-avance al terminar
-        allVideos.forEach((video, idx) => {
-            video.addEventListener('ended', () => {
-                const next = allVideos[idx + 1];
-                if (next) {
-                    playOnly(next);
+        // Encuentra un video regular visible y lo reproduce (para continuidad tras el scroll)
+        function findAndPlayVisibleRegular() {
+            for (const video of allRegularVideos) {
+                const rect = video.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                if (isVisible && video.paused) {
+                    playRegularVideo(video);
+                    return;
                 }
+            }
+        }
+
+        // AUTO-AVANCE: cuando termina un video regular, salta al siguiente visible
+        // (o al primero si ninguno está visible, para que siempre haya uno reproduciéndose)
+        allRegularVideos.forEach((video, idx) => {
+            video.addEventListener('ended', () => {
+                if (currentRegularVideo !== video) return; // Ignorar si ya no es el activo
+                
+                // Buscar el siguiente video regular VISIBLE
+                for (let i = 1; i <= allRegularVideos.length; i++) {
+                    const nextIdx = (idx + i) % allRegularVideos.length;
+                    const nextVideo = allRegularVideos[nextIdx];
+                    const rect = nextVideo.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                    if (isVisible) {
+                        playRegularVideo(nextVideo);
+                        return;
+                    }
+                }
+                // Si ninguno está visible, repetir el mismo (para mantener continuidad)
+                video.currentTime = 0;
+                video.play().catch(e => console.log(e));
             });
         });
 
