@@ -434,8 +434,8 @@
                 <div class="gallery-caption">Trabajando en el montaje</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo2.jpg')">
-                <img src="images/equipo/equipo2.jpg" alt="Usando el taladro">
-                <div class="gallery-caption">Perforando la madera</div>
+                <img src="images/equipo/equipo2.jpg" alt="Revisando el taladro">
+                <div class="gallery-caption">Revisando el taladro</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo3.jpg')">
                 <img src="images/equipo/equipo3.jpg" alt="Cortando madera">
@@ -607,7 +607,7 @@
     </footer>
 
     <!-- Botón flotante de audio -->
-    <button id="audio-toggle" class="audio-btn" aria-label="Activar sonido de ballenas">
+    <button id="audio-toggle" class="audio-btn" aria-label="Activar sonido ambiente">
         <svg id="icon-unmuted" class="audio-icon hidden" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -619,9 +619,10 @@
         </svg>
     </button>
 
-    <!-- Audio de ballenas (streaming) -->
-    <audio id="whale-audio" loop preload="none">
-        <source src="https://archive.org/download/WhaleSong_928/whale_song.mp3" type="audio/mpeg">
+    <!-- Audio de ambiente (streaming) -->
+    <audio id="ambient-audio" loop preload="none">
+        <source src="https://archive.org/download/stasis009/02_Satellite.mp3" type="audio/mpeg">
+        <source src="https://archive.org/download/stasis009/03_Galaxies.mp3" type="audio/mpeg">
         Tu navegador no soporta audio HTML5.
     </audio>
 
@@ -655,30 +656,63 @@
             if (e.key === 'Escape') closeLightbox();
         });
 
-        // Control de audio de ballenas
+        // --- Control de audio con salto y fade-in ---
         const audioBtn = document.getElementById('audio-toggle');
-        const whaleAudio = document.getElementById('whale-audio');
+        const ambientAudio = document.getElementById('ambient-audio');
         const iconUnmuted = document.getElementById('icon-unmuted');
         const iconMuted = document.getElementById('icon-muted');
 
         let isPlaying = false;
+        let fadeInterval = null;
+        const FADE_DURATION = 3000; // 3 segundos de fade-in
+        const START_TIME = 8; // Saltar los primeros 8 segundos
+
+        function fadeIn() {
+            clearInterval(fadeInterval);
+            ambientAudio.volume = 0;
+            const step = 0.01;
+            const intervalTime = FADE_DURATION / (1 / step);
+            fadeInterval = setInterval(() => {
+                if (ambientAudio.volume < 1) {
+                    ambientAudio.volume = Math.min(1, ambientAudio.volume + step);
+                } else {
+                    clearInterval(fadeInterval);
+                }
+            }, intervalTime);
+        }
 
         audioBtn.addEventListener('click', () => {
             if (isPlaying) {
-                whaleAudio.pause();
-                whaleAudio.currentTime = 0;
+                // Apagar
+                ambientAudio.pause();
+                ambientAudio.currentTime = 0;
+                ambientAudio.volume = 1; // Resetear volumen
+                clearInterval(fadeInterval);
                 iconUnmuted.classList.add('hidden');
                 iconMuted.classList.remove('hidden');
-                audioBtn.setAttribute('aria-label', 'Activar sonido de ballenas');
+                audioBtn.setAttribute('aria-label', 'Activar sonido ambiente');
                 isPlaying = false;
             } else {
-                whaleAudio.play().then(() => {
+                // Encender
+                if (ambientAudio.readyState >= 1) { // Si ya hay metadatos
+                    ambientAudio.currentTime = START_TIME;
+                }
+                ambientAudio.play().then(() => {
+                    fadeIn();
                     iconMuted.classList.add('hidden');
                     iconUnmuted.classList.remove('hidden');
-                    audioBtn.setAttribute('aria-label', 'Silenciar sonido de ballenas');
+                    audioBtn.setAttribute('aria-label', 'Silenciar sonido ambiente');
                     isPlaying = true;
                 }).catch(error => {
                     console.log('Error al reproducir audio:', error);
+                    // Fallback: intentar sin saltar
+                    ambientAudio.play().then(() => {
+                        fadeIn();
+                        iconMuted.classList.add('hidden');
+                        iconUnmuted.classList.remove('hidden');
+                        audioBtn.setAttribute('aria-label', 'Silenciar sonido ambiente');
+                        isPlaying = true;
+                    }).catch(e => console.log('Error fatal de audio:', e));
                 });
             }
         });
