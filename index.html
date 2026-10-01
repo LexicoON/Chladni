@@ -38,7 +38,7 @@
             top: 0;
             height: 100vh;
             width: 80px;
-            z-index: -1;
+            z-index: 0; /* Asegurar que está detrás del contenido */
             pointer-events: none;
         }
         .wave-canvas.left { left: 0; }
@@ -114,6 +114,7 @@
             position: relative;
             background: url('https://as2.ftcdn.net/jpg/00/54/01/81/1000_F_54018129_UYnlnkzw0gNOedKTMlSUfWnHlt71J9Ud.jpg') center/cover no-repeat;
             background-attachment: fixed;
+            z-index: 1;
         }
 
         header::before {
@@ -171,6 +172,8 @@
             padding: 4rem 1rem;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2; /* Para que esté por encima de las ondas de fondo */
         }
 
         h2 {
@@ -250,21 +253,26 @@
             margin-bottom: 3rem;
         }
 
-        /* Ajuste para imágenes y videos */
+        /* Truco de padding-top para evitar bugs de carga en móvil */
         .gallery-item, .video-item {
             position: relative;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            aspect-ratio: 3/4; /* Proporción vertical */
-            background: #000;
+            background: #eee;
+            width: 100%;
+            padding-top: 133%; /* Relación de aspecto 3:4 */
         }
 
         .gallery-item img, .video-item video {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
+            display: block; /* Crucial para móvil */
         }
 
         .gallery-item:hover img {
@@ -337,6 +345,43 @@
             color: var(--text-light);
             font-size: 0.85rem;
             margin-top: 0.5rem;
+        }
+
+        /* Tarjeta especial de Institución */
+        .school-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-top: 5px solid var(--secondary);
+            margin: 3rem auto 0;
+            max-width: 600px;
+        }
+
+        .school-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .school-card .school-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .school-card .grade {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .school-card .event {
+            color: var(--text-light);
+            font-size: 0.95rem;
         }
 
         /* Sección de Análisis */
@@ -416,6 +461,8 @@
             text-align: center;
             padding: 2rem;
             margin-top: 3rem;
+            position: relative;
+            z-index: 2;
         }
 
         footer p {
@@ -508,9 +555,10 @@
             .wave-canvas { width: 40px; } /* Ondas más delgadas en móvil */
             section { padding: 3rem 1rem; }
             
-            /* Galería en 1 columna en móvil */
+            /* Galería en 2 columnas en móvil */
             .gallery { 
-                grid-template-columns: 1fr; 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 0.8rem;
             }
             
             /* Equipo en 2 columnas en móvil */
@@ -522,6 +570,8 @@
             .team-card .avatar { width: 50px; height: 50px; font-size: 1.2rem; }
             .team-card h4 { font-size: 0.9rem; }
             .team-card .role { font-size: 0.65rem; }
+            
+            .school-card { padding: 1.5rem; margin: 2rem 0 0; }
         }
     </style>
 </head>
@@ -627,27 +677,27 @@
         <h3 class="gallery-title">👥 Nuestro Equipo en Acción</h3>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo1.jpg')">
-                <img src="images/equipo/equipo1.jpg" alt="Equipo trabajando">
+                <img src="images/equipo/equipo1.jpg" alt="Equipo trabajando" loading="lazy">
                 <div class="gallery-caption">Trabajando en el montaje</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo2.jpg')">
-                <img src="images/equipo/equipo2.jpg" alt="Revisando el taladro">
+                <img src="images/equipo/equipo2.jpg" alt="Revisando el taladro" loading="lazy">
                 <div class="gallery-caption">Revisando el taladro</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo3.jpg')">
-                <img src="images/equipo/equipo3.jpg" alt="Cortando madera">
+                <img src="images/equipo/equipo3.jpg" alt="Cortando madera" loading="lazy">
                 <div class="gallery-caption">Cortando la base</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo4.jpg')">
-                <img src="images/equipo/equipo4.jpg" alt="Trabajando en la calle">
+                <img src="images/equipo/equipo4.jpg" alt="Trabajando en la calle" loading="lazy">
                 <div class="gallery-caption">Ajustes finales en equipo</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo5.jpg')">
-                <img src="images/equipo/equipo5.jpg" alt="Manos serrando">
+                <img src="images/equipo/equipo5.jpg" alt="Manos serrando" loading="lazy">
                 <div class="gallery-caption">Detalle del corte</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo6.jpg')">
-                <img src="images/equipo/equipo6.jpg" alt="Cargando la madera">
+                <img src="images/equipo/equipo6.jpg" alt="Cargando la madera" loading="lazy">
                 <div class="gallery-caption">Preparando los materiales</div>
             </div>
         </div>
@@ -684,31 +734,31 @@
         <h3 class="gallery-title">🔧 Construyendo el Prototipo</h3>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo1.jpg')">
-                <img src="images/prototipo/prototipo1.jpg" alt="Armando subwoofer">
+                <img src="images/prototipo/prototipo1.jpg" alt="Armando subwoofer" loading="lazy">
                 <div class="gallery-caption">Ensamblando el subwoofer</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo2.jpg')">
-                <img src="images/prototipo/prototipo2.jpg" alt="Varilla roscada">
+                <img src="images/prototipo/prototipo2.jpg" alt="Varilla roscada" loading="lazy">
                 <div class="gallery-caption">Varillas de sujeción</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo3.jpg')">
-                <img src="images/prototipo/prototipo3.jpg" alt="Tabla de madera">
+                <img src="images/prototipo/prototipo3.jpg" alt="Tabla de madera" loading="lazy">
                 <div class="gallery-caption">Base de madera</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo4.jpg')">
-                <img src="images/prototipo/prototipo4.jpg" alt="Acrílico">
+                <img src="images/prototipo/prototipo4.jpg" alt="Acrílico" loading="lazy">
                 <div class="gallery-caption">Lámina de acrílico</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo5.jpg')">
-                <img src="images/prototipo/prototipo5.jpg" alt="Guantes de trabajo">
+                <img src="images/prototipo/prototipo5.jpg" alt="Guantes de trabajo" loading="lazy">
                 <div class="gallery-caption">Equipo de protección</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo6.jpg')">
-                <img src="images/prototipo/prototipo6.jpg" alt="Montaje lateral">
+                <img src="images/prototipo/prototipo6.jpg" alt="Montaje lateral" loading="lazy">
                 <div class="gallery-caption">Montaje interno</div>
             </div>
             <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo7.jpg')">
-                <img src="images/prototipo/prototipo7.jpg" alt="Montaje completo">
+                <img src="images/prototipo/prototipo7.jpg" alt="Montaje completo" loading="lazy">
                 <div class="gallery-caption">Estructura ensamblada</div>
             </div>
         </div>
@@ -727,7 +777,7 @@
         <h3 class="gallery-title">✨ Resultados y Patrones</h3>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox('images/resultados/resultado1.jpg')">
-                <img src="images/resultados/resultado1.jpg" alt="Placa metálica">
+                <img src="images/resultados/resultado1.jpg" alt="Placa metálica" loading="lazy">
                 <div class="gallery-caption">Placa lista para el experimento</div>
             </div>
         </div>
@@ -822,12 +872,18 @@
                 <div class="avatar" style="background: var(--primary);">TT</div>
                 <h4>Tomás Torres</h4>
                 <div class="role">Asesor</div>
-                <p class="info">Colegio Nuestra Señora de Bethlem</p>
             </div>
         </div>
 
-        <div style="margin-top: 2rem; text-align: center; color: var(--text-light);">
-            <p><strong>Grado:</strong> 11° A &nbsp;|&nbsp; <strong>Fecha:</strong> 26 de agosto de 2026</p>
+        <!-- Tarjeta de Información del Colegio -->
+        <div class="school-card">
+            <h3>Información Institucional</h3>
+            <div class="school-name">Colegio Nuestra Señora de Bethlem</div>
+            <div class="grade">Grado: 11° A</div>
+            <div class="event">Feria Científica 2026</div>
+            <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">
+                Proyecto: Sistema de visualización vibracional para la detección de alteraciones estructurales mediante figuras de Chladni.
+            </p>
         </div>
     </section>
 
@@ -872,7 +928,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Cerrar menú al hacer clic en un enlace
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -932,7 +987,7 @@
             videoObserver.observe(item);
         });
 
-        // --- CONTROL DE AUDIO (Corregido) ---
+        // --- CONTROL DE AUDIO ---
         const audioBtn = document.getElementById('audio-toggle');
         const ambientAudio = document.getElementById('ambient-audio');
         const iconUnmuted = document.getElementById('icon-unmuted');
@@ -940,8 +995,8 @@
 
         let isPlaying = false;
         let fadeInterval = null;
-        const FADE_DURATION = 3000; // 3 segundos de fade-in
-        const START_TIME = 8; // Saltar los primeros 8 segundos
+        const FADE_DURATION = 3000; 
+        const START_TIME = 8; 
 
         function fadeIn() {
             clearInterval(fadeInterval);
@@ -984,7 +1039,6 @@
                     isPlaying = true;
                 }).catch(error => {
                     console.log('Error al reproducir audio:', error);
-                    // Fallback: intentar sin saltar
                     ambientAudio.play().then(() => {
                         fadeIn();
                         iconMuted.classList.add('hidden');
@@ -1023,7 +1077,7 @@
         const gridSize = 6; // Tamaño de los cuadraditos
 
         function drawWaves() {
-            time += 0.04;
+            time += 0.008; // Velocidad reducida para efecto relajante
             ctxLeft.clearRect(0, 0, waveWidth, waveHeight);
             ctxRight.clearRect(0, 0, waveWidth, waveHeight);
 
@@ -1032,15 +1086,16 @@
             ctxRight.fillStyle = 'rgba(44, 62, 80, 0.15)';
 
             for (let y = 0; y < waveHeight; y += gridSize) {
-                // Onda izquierda
-                let ampLeft = 15 + Math.sin(y * 0.02 + time) * 10 + Math.sin(y * 0.005 + time * 0.5) * 5;
-                for (let x = 0; x < ampLeft; x += gridSize) {
+                // Amplitud compartida para que ambas ondas tengan la misma forma
+                let amp = 20 + Math.sin(y * 0.01 + time) * 15 + Math.sin(y * 0.02 + time * 0.5) * 5;
+                
+                // Onda izquierda (picos hacia la derecha)
+                for (let x = 0; x < amp; x += gridSize) {
                     ctxLeft.fillRect(x, y, gridSize - 1, gridSize - 1);
                 }
                 
-                // Onda derecha
-                let ampRight = 15 + Math.sin(y * 0.02 + time + 1.5) * 10 + Math.sin(y * 0.005 + time * 0.5 + 1.5) * 5;
-                for (let x = waveWidth - ampRight; x < waveWidth; x += gridSize) {
+                // Onda derecha (picos hacia la izquierda - espejo exacto)
+                for (let x = waveWidth - amp; x < waveWidth; x += gridSize) {
                     ctxRight.fillRect(x, y, gridSize - 1, gridSize - 1);
                 }
             }
