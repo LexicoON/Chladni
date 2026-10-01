@@ -38,11 +38,22 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 1000; padding: 1rem 2rem;
+            z-index: 1000; padding: 0.8rem 2rem;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo { font-weight: 700; font-size: 1.2rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; z-index: 1001; }
-        .logo svg { width: 24px; height: 24px; stroke: var(--secondary); }
+        .logo {
+            font-weight: 700; font-size: 1.2rem; color: var(--primary);
+            display: flex; align-items: center; gap: 0.7rem;
+            z-index: 1001;
+        }
+        .logo img {
+            width: 42px; height: 42px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
         .nav-links { display: flex; gap: 1.5rem; }
         .nav-links a { text-decoration: none; color: var(--text); font-weight: 400; transition: color 0.3s; }
         .nav-links a:hover { color: var(--secondary); }
@@ -62,21 +73,79 @@
             z-index: 1;
         }
         .hero-content { position: relative; z-index: 2; padding: 0 1rem; max-width: 900px; }
+
+        .hero-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 1.2rem;
+            animation: fadeInDown 1s ease;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
+        }
+
         header h1 {
-            font-size: 4rem; color: var(--primary); margin-bottom: 0.5rem;
-            animation: fadeInDown 1s ease; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            animation: fadeInDown 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+            letter-spacing: -1px;
+            line-height: 1.1;
+            font-weight: 700;
         }
+
+        /* Subtítulo con estilo editorial + líneas decorativas */
         .project-subtitle {
-            font-size: 1.4rem; font-weight: 600; color: var(--secondary);
-            margin-bottom: 1.5rem; animation: fadeInUp 1s ease 0.2s both; line-height: 1.4;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.2s both;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 720px;
         }
-        header p { font-size: 1.2rem; color: var(--text); max-width: 700px; margin: 0 auto 2rem; animation: fadeInUp 1s ease 0.3s both; }
+        .project-subtitle::before,
+        .project-subtitle::after {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 1px;
+            background: var(--secondary);
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text);
+            max-width: 620px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
         .btn {
-            display: inline-block; padding: 1rem 2.5rem; background: var(--secondary);
-            color: white; text-decoration: none; border-radius: 50px; font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1s ease 0.6s both;
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.6s both;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
         }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(52, 152, 219, 0.45); }
 
         /* Secciones generales */
         section { padding: 4rem 1rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
@@ -135,6 +204,11 @@
 
         /* Institución */
         .school-card { background: white; border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border-top: 5px solid var(--secondary); margin: 3rem auto 0; max-width: 600px; }
+        .school-card .school-logo {
+            width: 70px; height: 70px; object-fit: contain;
+            margin: 0 auto 1rem; display: block;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+        }
         .school-card h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
         .school-card .school-name { font-weight: 700; font-size: 1.2rem; color: var(--text); margin-bottom: 0.5rem; }
         .school-card .grade { color: var(--secondary); font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; }
@@ -180,7 +254,18 @@
         .audio-icon { width: 32px; height: 32px; transition: opacity 0.3s ease; }
         .hidden { display: none; }
 
-        footer { background: var(--dark); color: white; text-align: center; padding: 2rem; margin-top: 3rem; position: relative; z-index: 2; }
+        /* Footer */
+        footer {
+            background: var(--dark); color: white;
+            text-align: center; padding: 2.5rem 2rem;
+            margin-top: 3rem; position: relative; z-index: 2;
+        }
+        .footer-logo {
+            width: 60px; height: 60px; object-fit: contain;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+        }
         footer p { opacity: 0.7; font-size: 0.9rem; }
 
         /* Lightbox */
@@ -200,10 +285,59 @@
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE TABLET --- */
+        @media (max-width: 900px) {
+            header h1 { font-size: 3rem; }
+            .project-subtitle { letter-spacing: 2px; font-size: 0.8rem; }
+        }
+
+        /* --- RESPONSIVE MÓVIL --- */
         @media (max-width: 768px) {
-            header h1 { font-size: 2.2rem; }
-            .project-subtitle { font-size: 1.1rem; }
+            .logo { font-size: 1rem; gap: 0.5rem; }
+            .logo img { width: 36px; height: 36px; }
+
+            /* HERO MÓVIL: limpio, elegante, con protagonismo del título */
+            header { padding: 1.5rem 1.25rem; }
+            .hero-content { padding: 0; max-width: 100%; }
+
+            .hero-logo {
+                width: 72px;
+                height: 72px;
+                margin-bottom: 1rem;
+            }
+
+            header h1 {
+                font-size: 2.4rem;
+                letter-spacing: -0.5px;
+                line-height: 1.1;
+                margin-bottom: 0.6rem;
+            }
+
+            .project-subtitle {
+                font-size: 0.7rem;
+                letter-spacing: 2px;
+                line-height: 1.7;
+                margin-bottom: 1.8rem;
+                gap: 0.6rem;
+                max-width: 95%;
+                font-weight: 600;
+            }
+            .project-subtitle::before,
+            .project-subtitle::after {
+                width: 18px;
+            }
+
+            /* Ocultar la descripción larga en móvil para dar aire */
+            .hero-description {
+                display: none;
+            }
+
+            .btn {
+                padding: 0.85rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            /* Otras secciones */
             .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; flex-direction: column; padding: 1rem; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
             .nav-links.active { display: flex; }
             .menu-toggle { display: block; }
@@ -218,6 +352,7 @@
             .school-card { padding: 1.5rem; margin: 2rem 0 0; }
             .play-badge { width: 28px; height: 28px; font-size: 12px; }
             .btn-fair { padding: 0.9rem 1.4rem; font-size: 0.9rem; }
+            .footer-logo { width: 50px; height: 50px; }
         }
     </style>
 </head>
@@ -228,9 +363,7 @@
 
     <nav>
         <div class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 12s2-4 6-4 6 4 6 4 2 4 6 4 6-4 6-4"></path>
-            </svg>
+            <img src="images/logo.png" alt="Logo del proyecto">
             Figuras de Chladni
         </div>
         <button class="menu-toggle" id="menu-toggle">☰</button>
@@ -245,9 +378,10 @@
 
     <header id="inicio">
         <div class="hero-content">
+            <img src="images/logo.png" alt="Logo del proyecto" class="hero-logo">
             <h1>El Arte de las Ondas</h1>
             <p class="project-subtitle">Influencia de la frecuencia de excitación en la formación de figuras de Chladni</p>
-            <p>Descubre cómo el sonido y la vibración dan forma a patrones geométricos increíbles. Un proyecto de investigación sobre las Figuras de Chladni y las ondas estacionarias.</p>
+            <p class="hero-description">Descubre cómo el sonido y la vibración dan forma a patrones geométricos increíbles. Un proyecto de investigación sobre las Figuras de Chladni y las ondas estacionarias.</p>
             <a href="#definiciones" class="btn">Comenzar a Explorar</a>
         </div>
     </header>
@@ -288,7 +422,6 @@
             Explora nuestro proceso, el prototipo y los patrones que logramos capturar.
         </p>
 
-        <!-- 1. Equipo -->
         <h3 class="gallery-title">👥 Nuestro Equipo en Acción</h3>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo1.jpg', 'image')">
@@ -338,7 +471,6 @@
             </div>
         </div>
 
-        <!-- 2. Prototipo -->
         <h3 class="gallery-title">🔧 Construyendo el Prototipo</h3>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo1.jpg', 'image')">
@@ -370,7 +502,6 @@
                 <div class="gallery-caption">Estructura ensamblada</div>
             </div>
             
-            <!-- Video PRIORITY: Proyecto casi terminado -->
             <div class="video-item span-full priority" onclick="openLightbox('videos/prototipo_final.mp4', 'video')">
                 <video muted playsinline loop preload="metadata"><source src="videos/prototipo_final.mp4" type="video/mp4"></video>
                 <div class="play-badge">▶</div>
@@ -378,7 +509,6 @@
             </div>
         </div>
 
-        <!-- 3. Resultados -->
         <h3 class="gallery-title">✨ Resultados y Patrones</h3>
         <div class="gallery">
             <div class="gallery-item span-full" onclick="openLightbox('images/resultados/resultado1.jpg', 'image')">
@@ -386,7 +516,6 @@
                 <div class="gallery-caption">Placa lista para el experimento</div>
             </div>
             
-            <!-- Videos PRIORITY: Patrones -->
             <div class="video-item priority" onclick="openLightbox('videos/resultado1.mp4', 'video')">
                 <video muted playsinline loop preload="metadata"><source src="videos/resultado1.mp4" type="video/mp4"></video>
                 <div class="play-badge">▶</div>
@@ -448,13 +577,13 @@
         </div>
 
         <div class="school-card">
+            <img src="images/logo.png" alt="Logo del proyecto" class="school-logo">
             <h3>Información Institucional</h3>
             <div class="school-name">Colegio Nuestra Señora de Bethlem</div>
             <div class="grade">Grado: 11° A</div>
             <div class="event">Innovafest 2026</div>
         </div>
 
-        <!-- Enlace a la feria -->
         <div class="fair-cta">
             <a href="https://vermillion-melomakarona-44b304.netlify.app/" target="_blank" rel="noopener" class="btn-fair">
                 🎪 Explora los demás stands en Innovafest 2026 →
@@ -463,6 +592,7 @@
     </section>
 
     <footer>
+        <img src="images/logo.png" alt="Logo del proyecto" class="footer-logo">
         <p>Proyecto de Investigación: Influencia de la frecuencia de excitación en la formación de figuras de Chladni.</p>
         <p style="margin-top: 0.5rem;">&copy; 2026 - Todos los derechos reservados.</p>
     </footer>
@@ -536,7 +666,6 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-        // --- FADE IN INDIVIDUAL DE TARJETAS ---
         const cardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -555,19 +684,11 @@
         // ============================================================
         // SISTEMA DE VIDEOS
         // ============================================================
-        // Regla: 
-        //  - Videos PRIORITY (prototipo_final, patrón 1, patrón 2): siempre se
-        //    reproducen en bucle cuando están en pantalla. No afectan a los demás.
-        //  - Videos REGULARES (trabajo 1-4): solo uno a la vez. Al terminar,
-        //    saltan al siguiente visible. Si no hay otro visible, se repite el mismo.
-
         const priorityItems = document.querySelectorAll('.video-item.priority');
         const regularItems = document.querySelectorAll('.video-item:not(.priority)');
-        
         const allPriorityVideos = Array.from(priorityItems).map(i => i.querySelector('video'));
         const allRegularVideos = Array.from(regularItems).map(i => i.querySelector('video'));
 
-        // --- PRIORITY VIDEOS: play cuando están en pantalla ---
         const priorityObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const video = entry.target.querySelector('video');
@@ -581,16 +702,13 @@
         }, { threshold: 0.4 });
         priorityItems.forEach(item => priorityObserver.observe(item));
 
-        // --- REGULAR VIDEOS: uno a la vez, con ciclo continuo ---
         let currentRegularVideo = null;
 
         function playRegularVideo(video) {
             if (currentRegularVideo === video && !video.paused) return;
-            // Pausar todos los demás
             allRegularVideos.forEach(v => {
                 if (v !== video) { v.pause(); v.currentTime = 0; }
             });
-            // Reproducir este
             if (video.ended || video.currentTime >= video.duration - 0.1) {
                 video.currentTime = 0;
             }
@@ -598,33 +716,21 @@
             currentRegularVideo = video;
         }
 
-        function pauseAllRegular() {
-            allRegularVideos.forEach(v => { v.pause(); v.currentTime = 0; });
-            currentRegularVideo = null;
-        }
-
-        // Observer de los videos regulares
         const regularObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const video = entry.target.querySelector('video');
                 if (!video) return;
-                
                 if (entry.isIntersecting) {
-                    // Solo reproducir si no hay uno reproduciéndose ya en otro lado
-                    // (para evitar que el scroll inicie varios a la vez)
                     playRegularVideo(video);
                 } else if (currentRegularVideo === video) {
-                    // Si el que se estaba reproduciendo ya no se ve, pausar
                     video.pause();
                     currentRegularVideo = null;
-                    // Buscar otro video regular visible para continuar
                     findAndPlayVisibleRegular();
                 }
             });
         }, { threshold: 0.6 });
         regularItems.forEach(item => regularObserver.observe(item));
 
-        // Encuentra un video regular visible y lo reproduce (para continuidad tras el scroll)
         function findAndPlayVisibleRegular() {
             for (const video of allRegularVideos) {
                 const rect = video.getBoundingClientRect();
@@ -636,13 +742,9 @@
             }
         }
 
-        // AUTO-AVANCE: cuando termina un video regular, salta al siguiente visible
-        // (o al primero si ninguno está visible, para que siempre haya uno reproduciéndose)
         allRegularVideos.forEach((video, idx) => {
             video.addEventListener('ended', () => {
-                if (currentRegularVideo !== video) return; // Ignorar si ya no es el activo
-                
-                // Buscar el siguiente video regular VISIBLE
+                if (currentRegularVideo !== video) return;
                 for (let i = 1; i <= allRegularVideos.length; i++) {
                     const nextIdx = (idx + i) % allRegularVideos.length;
                     const nextVideo = allRegularVideos[nextIdx];
@@ -653,7 +755,6 @@
                         return;
                     }
                 }
-                // Si ninguno está visible, repetir el mismo (para mantener continuidad)
                 video.currentTime = 0;
                 video.play().catch(e => console.log(e));
             });
