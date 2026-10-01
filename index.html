@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Figuras de Chladni - Proyecto Científico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2C3E50;
@@ -14,17 +16,20 @@
             --dark: #1A252F;
             --text: #333;
             --text-light: #666;
+            --serif: 'Fraunces', Georgia, serif;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--sans);
             line-height: 1.6;
             color: var(--text);
             background-color: var(--light);
             overflow-x: hidden;
             width: 100%;
+            font-feature-settings: "ss01", "cv11";
         }
 
         /* --- Animación de fondo pasiva (Ondas Low Poly) --- */
@@ -42,9 +47,13 @@
             display: flex; justify-content: space-between; align-items: center;
         }
         .logo {
-            font-weight: 700; font-size: 1.2rem; color: var(--primary);
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--primary);
             display: flex; align-items: center; gap: 0.7rem;
             z-index: 1001;
+            letter-spacing: -0.3px;
         }
         .logo img {
             width: 42px; height: 42px;
@@ -55,7 +64,15 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .nav-links { display: flex; gap: 1.5rem; }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 400; transition: color 0.3s; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-family: var(--sans);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            letter-spacing: 0.2px;
+        }
         .nav-links a:hover { color: var(--secondary); }
         .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); z-index: 1001; }
 
@@ -84,18 +101,20 @@
         }
 
         header h1 {
-            font-size: 4rem;
+            font-family: var(--serif);
+            font-size: 4.5rem;
             color: var(--primary);
             margin-bottom: 0.8rem;
             animation: fadeInDown 1s ease;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
-            letter-spacing: -1px;
-            line-height: 1.1;
-            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            letter-spacing: -1.5px;
+            line-height: 1.05;
+            font-weight: 600;
         }
 
         /* Subtítulo con estilo editorial + líneas decorativas */
         .project-subtitle {
+            font-family: var(--sans);
             font-size: 0.85rem;
             font-weight: 500;
             color: var(--secondary);
@@ -122,6 +141,7 @@
         }
 
         .hero-description {
+            font-family: var(--sans);
             font-size: 1.05rem;
             color: var(--text);
             max-width: 620px;
@@ -138,6 +158,7 @@
             color: white;
             text-decoration: none;
             border-radius: 50px;
+            font-family: var(--sans);
             font-weight: 600;
             font-size: 0.95rem;
             letter-spacing: 0.5px;
@@ -149,19 +170,53 @@
 
         /* Secciones generales */
         section { padding: 4rem 1rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
-        h2 { font-size: 2rem; color: var(--primary); margin-bottom: 2rem; text-align: center; position: relative; }
-        h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--secondary); margin: 1rem auto 0; border-radius: 2px; }
+        h2 {
+            font-family: var(--serif);
+            font-size: 2.4rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        h2::after { content: ''; display: block; width: 60px; height: 3px; background: var(--secondary); margin: 1rem auto 0; border-radius: 2px; }
 
         /* Acordeón */
         .accordion { background: white; border-radius: 10px; margin-bottom: 1rem; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .accordion-header { padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--primary); transition: background 0.3s; }
+        .accordion-header {
+            padding: 1.5rem; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--sans);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--primary);
+            transition: background 0.3s;
+        }
         .accordion-header:hover { background: #f8f9fa; }
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 1.5rem; background: #fafafa; color: var(--text-light); }
+        .accordion-content {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 1.5rem;
+            background: #fafafa;
+            color: var(--text-light);
+            font-family: var(--sans);
+            font-size: 0.95rem;
+        }
         .accordion.active .accordion-content { max-height: 500px; padding: 1.5rem; }
         .accordion.active .accordion-header { background: var(--secondary); color: white; }
 
         /* Galería */
-        .gallery-title { margin: 2rem 0 1rem; color: var(--primary); font-size: 1.5rem; border-left: 5px solid var(--secondary); padding-left: 1rem; }
+        .gallery-title {
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: 1.6rem;
+            border-left: 4px solid var(--secondary);
+            padding-left: 1rem;
+            letter-spacing: -0.3px;
+        }
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
 
         .span-full { grid-column: 1 / -1; }
@@ -180,7 +235,11 @@
         .gallery-caption {
             position: absolute; bottom: 0; left: 0; right: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            color: white; padding: 1.5rem 1rem 1rem; font-size: 0.9rem;
+            color: white; padding: 1.5rem 1rem 1rem;
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
             pointer-events: none;
         }
 
@@ -198,9 +257,9 @@
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
         .team-card { background: white; border-radius: 15px; padding: 1.5rem 1rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
         .team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .team-card .avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary), var(--primary)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; color: white; font-weight: 700; }
-        .team-card h4 { color: var(--primary); margin-bottom: 0.25rem; font-size: 1rem; }
-        .team-card .role { color: var(--secondary); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .team-card .avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary), var(--primary)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: white; }
+        .team-card h4 { color: var(--primary); font-family: var(--serif); font-weight: 600; margin-bottom: 0.25rem; font-size: 1rem; letter-spacing: -0.2px; }
+        .team-card .role { color: var(--secondary); font-family: var(--sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
 
         /* Institución */
         .school-card { background: white; border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border-top: 5px solid var(--secondary); margin: 3rem auto 0; max-width: 600px; }
@@ -209,10 +268,10 @@
             margin: 0 auto 1rem; display: block;
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
         }
-        .school-card h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
-        .school-card .school-name { font-weight: 700; font-size: 1.2rem; color: var(--text); margin-bottom: 0.5rem; }
-        .school-card .grade { color: var(--secondary); font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; }
-        .school-card .event { color: var(--text-light); font-size: 0.95rem; }
+        .school-card h3 { color: var(--primary); font-family: var(--sans); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 1rem; }
+        .school-card .school-name { font-family: var(--serif); font-weight: 600; font-size: 1.4rem; color: var(--text); margin-bottom: 0.5rem; letter-spacing: -0.3px; }
+        .school-card .grade { color: var(--secondary); font-family: var(--sans); font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 0.5px; }
+        .school-card .event { color: var(--text-light); font-family: var(--sans); font-size: 0.9rem; }
 
         /* Enlace a la feria */
         .fair-cta { text-align: center; margin-top: 2.5rem; }
@@ -225,8 +284,9 @@
             color: white;
             text-decoration: none;
             border-radius: 50px;
+            font-family: var(--sans);
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
@@ -237,10 +297,10 @@
 
         /* Análisis */
         .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .analysis-card { background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--secondary); transition: transform 0.3s; }
+        .analysis-card { background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 4px solid var(--secondary); transition: transform 0.3s; }
         .analysis-card:hover { transform: translateY(-5px); }
-        .analysis-card h4 { color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; }
-        .analysis-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
+        .analysis-card h4 { color: var(--primary); font-family: var(--serif); font-weight: 600; margin-bottom: 1rem; font-size: 1.15rem; letter-spacing: -0.2px; line-height: 1.3; }
+        .analysis-card p { color: var(--text-light); font-family: var(--sans); font-size: 0.9rem; line-height: 1.7; }
 
         /* Botón de audio */
         .audio-btn {
@@ -266,7 +326,7 @@
             opacity: 0.95;
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
         }
-        footer p { opacity: 0.7; font-size: 0.9rem; }
+        footer p { opacity: 0.7; font-family: var(--sans); font-size: 0.85rem; }
 
         /* Lightbox */
         .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
@@ -287,16 +347,16 @@
 
         /* --- RESPONSIVE TABLET --- */
         @media (max-width: 900px) {
-            header h1 { font-size: 3rem; }
+            header h1 { font-size: 3.2rem; }
             .project-subtitle { letter-spacing: 2px; font-size: 0.8rem; }
+            h2 { font-size: 2.1rem; }
         }
 
         /* --- RESPONSIVE MÓVIL --- */
         @media (max-width: 768px) {
-            .logo { font-size: 1rem; gap: 0.5rem; }
+            .logo { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; gap: 0.5rem; letter-spacing: -0.2px; }
             .logo img { width: 36px; height: 36px; }
 
-            /* HERO MÓVIL: limpio, elegante, con protagonismo del título */
             header { padding: 1.5rem 1.25rem; }
             .hero-content { padding: 0; max-width: 100%; }
 
@@ -307,52 +367,57 @@
             }
 
             header h1 {
-                font-size: 2.4rem;
-                letter-spacing: -0.5px;
-                line-height: 1.1;
+                font-size: 2.6rem;
+                letter-spacing: -0.8px;
+                line-height: 1.05;
                 margin-bottom: 0.6rem;
+                font-weight: 600;
             }
 
             .project-subtitle {
-                font-size: 0.7rem;
+                font-size: 0.68rem;
                 letter-spacing: 2px;
                 line-height: 1.7;
                 margin-bottom: 1.8rem;
                 gap: 0.6rem;
                 max-width: 95%;
-                font-weight: 600;
+                font-weight: 500;
             }
             .project-subtitle::before,
             .project-subtitle::after {
                 width: 18px;
             }
 
-            /* Ocultar la descripción larga en móvil para dar aire */
-            .hero-description {
-                display: none;
-            }
+            .hero-description { display: none; }
 
             .btn {
                 padding: 0.85rem 2rem;
                 font-size: 0.9rem;
             }
 
-            /* Otras secciones */
             .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; flex-direction: column; padding: 1rem; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
             .nav-links.active { display: flex; }
             .menu-toggle { display: block; }
             .wave-canvas { width: 40px; }
             section { padding: 3rem 1rem; }
+
+            h2 { font-size: 1.7rem; letter-spacing: -0.3px; }
+            .gallery-title { font-size: 1.3rem; }
+
             .gallery { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .team-card { padding: 1rem 0.5rem; }
-            .team-card .avatar { width: 50px; height: 50px; font-size: 1.2rem; }
-            .team-card h4 { font-size: 0.9rem; }
-            .team-card .role { font-size: 0.65rem; }
+            .team-card .avatar { width: 50px; height: 50px; font-size: 1.3rem; }
+            .team-card h4 { font-size: 0.85rem; }
+            .team-card .role { font-size: 0.6rem; letter-spacing: 1px; }
             .school-card { padding: 1.5rem; margin: 2rem 0 0; }
+            .school-card .school-name { font-size: 1.15rem; }
             .play-badge { width: 28px; height: 28px; font-size: 12px; }
-            .btn-fair { padding: 0.9rem 1.4rem; font-size: 0.9rem; }
+            .btn-fair { padding: 0.9rem 1.4rem; font-size: 0.85rem; }
             .footer-logo { width: 50px; height: 50px; }
+            .accordion-header { font-size: 0.88rem; padding: 1.2rem; }
+            .accordion-content { font-size: 0.9rem; }
+            .analysis-card h4 { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -422,7 +487,7 @@
             Explora nuestro proceso, el prototipo y los patrones que logramos capturar.
         </p>
 
-        <h3 class="gallery-title">👥 Nuestro Equipo en Acción</h3>
+        <h3 class="gallery-title">Nuestro Equipo en Acción</h3>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo1.jpg', 'image')">
                 <img src="images/equipo/equipo1.jpg" alt="Equipo trabajando" loading="lazy">
@@ -471,7 +536,7 @@
             </div>
         </div>
 
-        <h3 class="gallery-title">🔧 Construyendo el Prototipo</h3>
+        <h3 class="gallery-title">Construyendo el Prototipo</h3>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo1.jpg', 'image')">
                 <img src="images/prototipo/prototipo1.jpg" alt="Armando subwoofer" loading="lazy">
@@ -509,7 +574,7 @@
             </div>
         </div>
 
-        <h3 class="gallery-title">✨ Resultados y Patrones</h3>
+        <h3 class="gallery-title">Resultados y Patrones</h3>
         <div class="gallery">
             <div class="gallery-item span-full" onclick="openLightbox('images/resultados/resultado1.jpg', 'image')">
                 <img src="images/resultados/resultado1.jpg" alt="Placa metálica" loading="lazy">
@@ -586,7 +651,7 @@
 
         <div class="fair-cta">
             <a href="https://vermillion-melomakarona-44b304.netlify.app/" target="_blank" rel="noopener" class="btn-fair">
-                🎪 Explora los demás stands en Innovafest 2026 →
+                Explora los demás stands en Innovafest 2026 →
             </a>
         </div>
     </section>
