@@ -16,12 +16,7 @@
             --text-light: #666;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -33,564 +28,185 @@
         }
 
         /* --- Animación de fondo pasiva (Ondas Low Poly) --- */
-        .wave-canvas {
-            position: fixed;
-            top: 0;
-            height: 100vh;
-            width: 80px;
-            z-index: 0;
-            pointer-events: none;
-        }
+        .wave-canvas { position: fixed; top: 0; height: 100vh; width: 80px; z-index: 0; pointer-events: none; }
         .wave-canvas.left { left: 0; }
         .wave-canvas.right { right: 0; }
 
         /* Navegación */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
+            position: fixed; top: 0; width: 100%;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            z-index: 1000; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            z-index: 1001;
-        }
-
-        .logo svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--secondary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 400;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary);
-            z-index: 1001;
-        }
+        .logo { font-weight: 700; font-size: 1.2rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; z-index: 1001; }
+        .logo svg { width: 24px; height: 24px; stroke: var(--secondary); }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 400; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--secondary); }
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); z-index: 1001; }
 
         /* Hero Section */
         header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 2rem; position: relative;
             background: url('https://as2.ftcdn.net/jpg/00/54/01/81/1000_F_54018129_UYnlnkzw0gNOedKTMlSUfWnHlt71J9Ud.jpg') center/cover no-repeat;
-            background-attachment: fixed;
-            z-index: 1;
+            background-attachment: fixed; z-index: 1;
         }
-
         header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, rgba(244, 247, 246, 0.92) 0%, rgba(195, 207, 226, 0.88) 100%);
             z-index: 1;
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            padding: 0 1rem;
-            max-width: 900px;
-        }
-
+        .hero-content { position: relative; z-index: 2; padding: 0 1rem; max-width: 900px; }
         header h1 {
-            font-size: 4rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            animation: fadeInDown 1s ease;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: 4rem; color: var(--primary); margin-bottom: 0.5rem;
+            animation: fadeInDown 1s ease; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-
         .project-subtitle {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease 0.2s both;
-            line-height: 1.4;
+            font-size: 1.4rem; font-weight: 600; color: var(--secondary);
+            margin-bottom: 1.5rem; animation: fadeInUp 1s ease 0.2s both; line-height: 1.4;
         }
-
-        header p {
-            font-size: 1.2rem;
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
-
+        header p { font-size: 1.2rem; color: var(--text); max-width: 700px; margin: 0 auto 2rem; animation: fadeInUp 1s ease 0.3s both; }
         .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--secondary);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 1s ease 0.6s both;
+            display: inline-block; padding: 1rem 2.5rem; background: var(--secondary);
+            color: white; text-decoration: none; border-radius: 50px; font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1s ease 0.6s both;
         }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
-        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3); }
 
         /* Secciones generales */
-        section {
-            padding: 4rem 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
+        section { padding: 4rem 1rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+        h2 { font-size: 2rem; color: var(--primary); margin-bottom: 2rem; text-align: center; position: relative; }
+        h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--secondary); margin: 1rem auto 0; border-radius: 2px; }
 
-        h2 {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 2rem;
-            text-align: center;
-            position: relative;
-        }
+        /* Acordeón */
+        .accordion { background: white; border-radius: 10px; margin-bottom: 1rem; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .accordion-header { padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--primary); transition: background 0.3s; }
+        .accordion-header:hover { background: #f8f9fa; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; padding: 0 1.5rem; background: #fafafa; color: var(--text-light); }
+        .accordion.active .accordion-content { max-height: 500px; padding: 1.5rem; }
+        .accordion.active .accordion-header { background: var(--secondary); color: white; }
 
-        h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--secondary);
-            margin: 1rem auto 0;
-            border-radius: 2px;
-        }
+        /* Galería */
+        .gallery-title { margin: 2rem 0 1rem; color: var(--primary); font-size: 1.5rem; border-left: 5px solid var(--secondary); padding-left: 1rem; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
 
-        /* Acordeón para Definiciones */
-        .accordion {
-            background: white;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+        /* FIX: elementos que ocupan todo el ancho del grid (PC y móvil) */
+        .span-full { grid-column: 1 / -1; }
 
-        .accordion-header {
-            padding: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: var(--primary);
-            transition: background 0.3s;
-        }
-
-        .accordion-header:hover {
-            background: #f8f9fa;
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
-            padding: 0 1.5rem;
-            background: #fafafa;
-            color: var(--text-light);
-        }
-
-        .accordion.active .accordion-content {
-            max-height: 500px;
-            padding: 1.5rem;
-        }
-
-        .accordion.active .accordion-header {
-            background: var(--secondary);
-            color: white;
-        }
-
-        /* Galería adaptada */
-        .gallery-title {
-            margin: 2rem 0 1rem;
-            color: var(--primary);
-            font-size: 1.5rem;
-            border-left: 5px solid var(--secondary);
-            padding-left: 1rem;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem; /* Reducido porque ahora todo está en un solo grid */
-        }
-
-        /* Truco de padding-top para evitar bugs de carga en móvil */
         .gallery-item, .video-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            background: #eee;
-            width: 100%;
-            padding-top: 133%; /* Relación de aspecto 3:4 */
-            cursor: pointer;
+            position: relative; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #eee;
+            width: 100%; padding-top: 133%; cursor: pointer;
         }
-
         .gallery-item img, .video-item video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-            display: block;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; transition: transform 0.5s; display: block;
         }
-
-        .gallery-item:hover img, .video-item:hover video {
-            transform: scale(1.05);
-        }
+        .gallery-item:hover img, .video-item:hover video { transform: scale(1.05); }
 
         .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            position: absolute; bottom: 0; left: 0; right: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            color: white;
-            padding: 1.5rem 1rem 1rem;
-            font-size: 0.9rem;
+            color: white; padding: 1.5rem 1rem 1rem; font-size: 0.9rem;
             pointer-events: none;
         }
 
-        /* Sección de Equipo Rediseñada */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .team-card {
-            background: white;
-            border-radius: 15px;
-            padding: 1.5rem 1rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .team-card .avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 1.5rem;
-            color: white;
-            font-weight: 700;
-        }
-
-        .team-card h4 {
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-            font-size: 1rem;
-        }
-
-        .team-card .role {
-            color: var(--secondary);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Tarjeta especial de Institución */
-        .school-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-top: 5px solid var(--secondary);
-            margin: 3rem auto 0;
-            max-width: 600px;
-        }
-
-        .school-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .school-card .school-name {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-        }
-
-        .school-card .grade {
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .school-card .event {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        /* Sección de Análisis */
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .analysis-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--secondary);
-            transition: transform 0.3s;
-        }
-
-        .analysis-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .analysis-card h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .analysis-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* Botón flotante de audio */
-        .audio-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: rgba(44, 62, 80, 0.85);
-            backdrop-filter: blur(8px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1500;
-        }
-
-        .audio-btn:hover {
+        /* FIX: ícono de play en la esquina superior derecha */
+        .play-badge {
+            position: absolute; top: 10px; right: 10px;
+            width: 32px; height: 32px; border-radius: 50%;
             background: rgba(52, 152, 219, 0.95);
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-size: 14px; z-index: 2; pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+            padding-left: 3px;
         }
 
-        .audio-icon {
-            width: 32px;
-            height: 32px;
-            transition: opacity 0.3s ease;
-        }
+        /* Equipo */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .team-card { background: white; border-radius: 15px; padding: 1.5rem 1rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+        .team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .team-card .avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary), var(--primary)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; color: white; font-weight: 700; }
+        .team-card h4 { color: var(--primary); margin-bottom: 0.25rem; font-size: 1rem; }
+        .team-card .role { color: var(--secondary); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-        .hidden {
-            display: none;
-        }
+        /* Institución (sin nombre del proyecto) */
+        .school-card { background: white; border-radius: 15px; padding: 2rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border-top: 5px solid var(--secondary); margin: 3rem auto 0; max-width: 600px; }
+        .school-card h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
+        .school-card .school-name { font-weight: 700; font-size: 1.2rem; color: var(--text); margin-bottom: 0.5rem; }
+        .school-card .grade { color: var(--secondary); font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .school-card .event { color: var(--text-light); font-size: 0.95rem; }
 
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            position: relative;
-            z-index: 2;
-        }
+        /* Análisis */
+        .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .analysis-card { background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--secondary); transition: transform 0.3s; }
+        .analysis-card:hover { transform: translateY(-5px); }
+        .analysis-card h4 { color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; }
+        .analysis-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
 
-        footer p {
-            opacity: 0.7;
-            font-size: 0.9rem;
+        /* Botón de audio */
+        .audio-btn {
+            position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px;
+            border-radius: 50%; background: rgba(44, 62, 80, 0.85);
+            backdrop-filter: blur(8px); border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transition: all 0.3s ease; z-index: 1500;
         }
+        .audio-btn:hover { background: rgba(52, 152, 219, 0.95); transform: scale(1.1); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5); }
+        .audio-icon { width: 32px; height: 32px; transition: opacity 0.3s ease; }
+        .hidden { display: none; }
+
+        footer { background: var(--dark); color: white; text-align: center; padding: 2rem; margin-top: 3rem; position: relative; z-index: 2; }
+        footer p { opacity: 0.7; font-size: 0.9rem; }
 
         /* Lightbox */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
+        .lightbox img, .lightbox video { max-width: 90%; max-height: 85%; border-radius: 10px; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
+        .lightbox.active { display: flex; }
+        .close-lightbox { position: absolute; top: 20px; right: 30px; color: white; font-size: 2.5rem; cursor: pointer; transition: color 0.3s; }
+        .close-lightbox:hover { color: var(--secondary); }
 
-        .lightbox img, .lightbox video {
-            max-width: 90%;
-            max-height: 85%;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-        }
+        /* --- Animación Secciones --- */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
-        .lightbox.active {
-            display: flex;
-        }
+        /* --- Animación Tarjetas (fade individual al hacer scroll) --- */
+        .card-fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .card-fade.visible { opacity: 1; transform: translateY(0); }
 
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        .close-lightbox:hover {
-            color: var(--secondary);
-        }
-
-        /* --- Animaciones Pasivas (Scroll Reveal) --- */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- RESPONSIVE (Móvil) --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             header h1 { font-size: 2.2rem; }
             .project-subtitle { font-size: 1.1rem; }
-            .nav-links { 
-                display: none; 
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: white;
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .menu-toggle {
-                display: block;
-            }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; flex-direction: column; padding: 1rem; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
             .wave-canvas { width: 40px; }
             section { padding: 3rem 1rem; }
-            
-            /* Galería en 2 columnas en móvil */
-            .gallery { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 0.8rem;
-            }
-            
-            /* Hace que un elemento ocupe las 2 columnas en móvil */
-            .span-2-mobile {
-                grid-column: span 2;
-            }
-            
-            /* Equipo en 2 columnas en móvil */
-            .team-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 1rem;
-            }
+            .gallery { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .team-card { padding: 1rem 0.5rem; }
             .team-card .avatar { width: 50px; height: 50px; font-size: 1.2rem; }
             .team-card h4 { font-size: 0.9rem; }
             .team-card .role { font-size: 0.65rem; }
-            
             .school-card { padding: 1.5rem; margin: 2rem 0 0; }
+            .play-badge { width: 28px; height: 28px; font-size: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Animación de fondo pasiva -->
     <canvas id="wave-canvas-left" class="wave-canvas left"></canvas>
     <canvas id="wave-canvas-right" class="wave-canvas right"></canvas>
 
-    <!-- Navegación -->
     <nav>
         <div class="logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -608,7 +224,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header id="inicio">
         <div class="hero-content">
             <h1>El Arte de las Ondas</h1>
@@ -618,72 +233,43 @@
         </div>
     </header>
 
-    <!-- Sección de Definiciones -->
-    <section id="definiciones" class="animate-on-scroll">
+    <!-- Definiciones -->
+    <section id="definiciones">
         <h2>¿Qué son las Figuras de Chladni?</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light);">
             Las figuras de Chladni son patrones que se forman cuando una superficie vibra a ciertas frecuencias. La arena se acumula en las líneas nodales (donde no hay vibración), revelando la geometría del sonido.
         </p>
 
         <div class="accordion">
-            <div class="accordion-header">
-                <span>1. ¿Qué es una onda y cuáles son sus características?</span>
-                <span>▼</span>
-            </div>
-            <div class="accordion-content">
-                <p>Una onda es una perturbación que transporta energía sin transportar materia. Sus características principales son la amplitud, longitud de onda, frecuencia y velocidad de propagación. Se clasifican en mecánicas (como el sonido) y electromagnéticas (como la luz).</p>
-            </div>
+            <div class="accordion-header"><span>1. ¿Qué es una onda y cuáles son sus características?</span><span>▼</span></div>
+            <div class="accordion-content"><p>Una onda es una perturbación que transporta energía sin transportar materia. Sus características principales son la amplitud, longitud de onda, frecuencia y velocidad de propagación. Se clasifican en mecánicas (como el sonido) y electromagnéticas (como la luz).</p></div>
         </div>
-
         <div class="accordion">
-            <div class="accordion-header">
-                <span>2. ¿Qué son las ondas estacionarias?</span>
-                <span>▼</span>
-            </div>
-            <div class="accordion-content">
-                <p>Son el resultado de la superposición de dos ondas de igual frecuencia y amplitud que viajan en sentidos opuestos. En ellas, el patrón no se desplaza, creando puntos fijos llamados nodos y antinodos.</p>
-            </div>
+            <div class="accordion-header"><span>2. ¿Qué son las ondas estacionarias?</span><span>▼</span></div>
+            <div class="accordion-content"><p>Son el resultado de la superposición de dos ondas de igual frecuencia y amplitud que viajan en sentidos opuestos. En ellas, el patrón no se desplaza, creando puntos fijos llamados nodos y antinodos.</p></div>
         </div>
-
         <div class="accordion">
-            <div class="accordion-header">
-                <span>3. ¿Qué son los nodos y antinodos?</span>
-                <span>▼</span>
-            </div>
-            <div class="accordion-content">
-                <p>Los <strong>nodos</strong> son zonas de vibración nula (donde la arena se acumula). Los <strong>antinodos</strong> son zonas de máxima vibración (donde la arena es expulsada). Esto permite visualizar la onda estacionaria.</p>
-            </div>
+            <div class="accordion-header"><span>3. ¿Qué son los nodos y antinodos?</span><span>▼</span></div>
+            <div class="accordion-content"><p>Los <strong>nodos</strong> son zonas de vibración nula (donde la arena se acumula). Los <strong>antinodos</strong> son zonas de máxima vibración (donde la arena es expulsada). Esto permite visualizar la onda estacionaria.</p></div>
         </div>
-
         <div class="accordion">
-            <div class="accordion-header">
-                <span>4. ¿Qué es la resonancia?</span>
-                <span>▼</span>
-            </div>
-            <div class="accordion-content">
-                <p>Es el aumento de amplitud cuando una fuerza externa coincide con la frecuencia natural del sistema. En las placas de Chladni, al alcanzar la resonancia, se forman patrones geométricos definidos.</p>
-            </div>
+            <div class="accordion-header"><span>4. ¿Qué es la resonancia?</span><span>▼</span></div>
+            <div class="accordion-content"><p>Es el aumento de amplitud cuando una fuerza externa coincide con la frecuencia natural del sistema. En las placas de Chladni, al alcanzar la resonancia, se forman patrones geométricos definidos.</p></div>
         </div>
-
         <div class="accordion">
-            <div class="accordion-header">
-                <span>5. ¿Cómo se forman las líneas nodales visibles?</span>
-                <span>▼</span>
-            </div>
-            <div class="accordion-content">
-                <p>La arena se desplaza desde los antinodos (zonas de mayor movimiento) hacia los nodos (zonas de vibración nula), acumulándose en las líneas nodales y revelando la geometría del modo de vibración.</p>
-            </div>
+            <div class="accordion-header"><span>5. ¿Cómo se forman las líneas nodales visibles?</span><span>▼</span></div>
+            <div class="accordion-content"><p>La arena se desplaza desde los antinodos (zonas de mayor movimiento) hacia los nodos (zonas de vibración nula), acumulándose en las líneas nodales y revelando la geometría del modo de vibración.</p></div>
         </div>
     </section>
 
-    <!-- Sección de Galería -->
-    <section id="galeria" class="animate-on-scroll">
+    <!-- Galería -->
+    <section id="galeria">
         <h2>Galería Multimedia</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light);">
             Explora nuestro proceso, el prototipo y los patrones que logramos capturar.
         </p>
 
-        <!-- 1. Equipo (Imágenes y Videos juntos en un solo grid) -->
+        <!-- 1. Equipo -->
         <h3 class="gallery-title">👥 Nuestro Equipo en Acción</h3>
         <div class="gallery">
             <div class="gallery-item" onclick="openLightbox('images/equipo/equipo1.jpg', 'image')">
@@ -711,30 +297,25 @@
                 <div class="gallery-caption">Preparando los materiales</div>
             </div>
             
-            <!-- Videos del Equipo -->
-            <div class="video-item autoplay" onclick="openLightbox('videos/equipo1.mp4', 'video')">
-                <video loop muted playsinline>
-                    <source src="videos/equipo1.mp4" type="video/mp4">
-                </video>
-                <div class="gallery-caption">Trabajo en equipo (1)</div>
+            <div class="video-item" onclick="openLightbox('videos/equipo1.mp4', 'video')">
+                <video muted playsinline preload="metadata"><source src="videos/equipo1.mp4" type="video/mp4"></video>
+                <div class="play-badge">▶</div>
+                <div class="gallery-caption">Trabajo</div>
             </div>
-            <div class="video-item autoplay" onclick="openLightbox('videos/equipo2.mp4', 'video')">
-                <video loop muted playsinline>
-                    <source src="videos/equipo2.mp4" type="video/mp4">
-                </video>
-                <div class="gallery-caption">Trabajo en equipo (2)</div>
+            <div class="video-item" onclick="openLightbox('videos/equipo2.mp4', 'video')">
+                <video muted playsinline preload="metadata"><source src="videos/equipo2.mp4" type="video/mp4"></video>
+                <div class="play-badge">▶</div>
+                <div class="gallery-caption">Trabajo</div>
             </div>
-            <div class="video-item autoplay" onclick="openLightbox('videos/equipo3.mp4', 'video')">
-                <video loop muted playsinline>
-                    <source src="videos/equipo3.mp4" type="video/mp4">
-                </video>
-                <div class="gallery-caption">Trabajo en equipo (3)</div>
+            <div class="video-item" onclick="openLightbox('videos/equipo3.mp4', 'video')">
+                <video muted playsinline preload="metadata"><source src="videos/equipo3.mp4" type="video/mp4"></video>
+                <div class="play-badge">▶</div>
+                <div class="gallery-caption">Trabajo</div>
             </div>
-            <div class="video-item autoplay" onclick="openLightbox('videos/equipo4.mp4', 'video')">
-                <video loop muted playsinline>
-                    <source src="videos/equipo4.mp4" type="video/mp4">
-                </video>
-                <div class="gallery-caption">Trabajo en equipo (4)</div>
+            <div class="video-item" onclick="openLightbox('videos/equipo4.mp4', 'video')">
+                <video muted playsinline preload="metadata"><source src="videos/equipo4.mp4" type="video/mp4"></video>
+                <div class="play-badge">▶</div>
+                <div class="gallery-caption">Trabajo</div>
             </div>
         </div>
 
@@ -770,11 +351,10 @@
                 <div class="gallery-caption">Estructura ensamblada</div>
             </div>
             
-            <!-- Video del Prototipo (span-2-mobile para móvil) -->
-            <div class="video-item autoplay span-2-mobile" onclick="openLightbox('videos/prototipo_final.mp4', 'video')">
-                <video loop muted playsinline>
-                    <source src="videos/prototipo_final.mp4" type="video/mp4">
-                </video>
+            <!-- Video del Prototipo (span-full: ocupa todo el ancho en PC y móvil) -->
+            <div class="video-item span-full" onclick="openLightbox('videos/prototipo_final.mp4', 'video')">
+                <video muted playsinline preload="metadata"><source src="videos/prototipo_final.mp4" type="video/mp4"></video>
+                <div class="play-badge">▶</div>
                 <div class="gallery-caption">Proyecto casi terminado</div>
             </div>
         </div>
@@ -782,34 +362,31 @@
         <!-- 3. Resultados -->
         <h3 class="gallery-title">✨ Resultados y Patrones</h3>
         <div class="gallery">
-            <div class="gallery-item span-2-mobile" onclick="openLightbox('images/resultados/resultado1.jpg', 'image')">
+            <!-- Imagen Placa (span-full) -->
+            <div class="gallery-item span-full" onclick="openLightbox('images/resultados/resultado1.jpg', 'image')">
                 <img src="images/resultados/resultado1.jpg" alt="Placa metálica" loading="lazy">
                 <div class="gallery-caption">Placa lista para el experimento</div>
             </div>
             
-            <!-- Videos de Resultados (Autoplay) -->
-            <div class="video-item autoplay" onclick="openLightbox('videos/resultado1.mp4', 'video')">
-                <video loop muted playsinline>
-                    <source src="videos/resultado1.mp4" type="video/mp4">
-                </video>
-                <div class="gallery-caption">Formación de patrón (1)</div>
+            <div class="video-item" onclick="openLightbox('videos/resultado1.mp4', 'video')">
+                <video muted playsinline preload="metadata"><source src="videos/resultado1.mp4" type="video/mp4"></video>
+                <div class="play-badge">▶</div>
+                <div class="gallery-caption">Patrón 1</div>
             </div>
-            <div class="video-item autoplay" onclick="openLightbox('videos/resultado2.mp4', 'video')">
-                <video loop muted playsinline>
-                    <source src="videos/resultado2.mp4" type="video/mp4">
-                </video>
-                <div class="gallery-caption">Formación de patrón (2)</div>
+            <div class="video-item" onclick="openLightbox('videos/resultado2.mp4', 'video')">
+                <video muted playsinline preload="metadata"><source src="videos/resultado2.mp4" type="video/mp4"></video>
+                <div class="play-badge">▶</div>
+                <div class="gallery-caption">Patrón 2</div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Análisis -->
-    <section id="analisis" class="animate-on-scroll">
+    <!-- Análisis -->
+    <section id="analisis">
         <h2>Análisis de los Resultados</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light);">
             A partir de los resultados obtenidos, se analizó el comportamiento de las partículas de arena frente a las diferentes condiciones de vibración.
         </p>
-
         <div class="analysis-grid">
             <div class="analysis-card">
                 <h4>1. Relación entre la frecuencia y los patrones</h4>
@@ -830,45 +407,17 @@
         </div>
     </section>
 
-    <!-- Sección de Equipo -->
-    <section id="equipo" class="animate-on-scroll">
+    <!-- Equipo -->
+    <section id="equipo">
         <h2>Nuestro Equipo</h2>
         <div class="team-grid">
-            <div class="team-card">
-                <div class="avatar">A</div>
-                <h4>Ana Lucía Carazo</h4>
-                <div class="role">Integrante</div>
-            </div>
-            <div class="team-card">
-                <div class="avatar">K</div>
-                <h4>Kasey de León</h4>
-                <div class="role">Integrante</div>
-            </div>
-            <div class="team-card">
-                <div class="avatar">A</div>
-                <h4>Alexis Batista</h4>
-                <div class="role">Integrante</div>
-            </div>
-            <div class="team-card">
-                <div class="avatar">J</div>
-                <h4>José Almario</h4>
-                <div class="role">Integrante</div>
-            </div>
-            <div class="team-card">
-                <div class="avatar">D</div>
-                <h4>Diana Moreno</h4>
-                <div class="role">Integrante</div>
-            </div>
-            <div class="team-card">
-                <div class="avatar">J</div>
-                <h4>José Pinto</h4>
-                <div class="role">Integrante</div>
-            </div>
-            <div class="team-card">
-                <div class="avatar">A</div>
-                <h4>Allison Pinto</h4>
-                <div class="role">Integrante</div>
-            </div>
+            <div class="team-card"><div class="avatar">A</div><h4>Ana Lucía Carazo</h4><div class="role">Integrante</div></div>
+            <div class="team-card"><div class="avatar">K</div><h4>Kasey de León</h4><div class="role">Integrante</div></div>
+            <div class="team-card"><div class="avatar">A</div><h4>Alexis Batista</h4><div class="role">Integrante</div></div>
+            <div class="team-card"><div class="avatar">J</div><h4>José Almario</h4><div class="role">Integrante</div></div>
+            <div class="team-card"><div class="avatar">D</div><h4>Diana Moreno</h4><div class="role">Integrante</div></div>
+            <div class="team-card"><div class="avatar">J</div><h4>José Pinto</h4><div class="role">Integrante</div></div>
+            <div class="team-card"><div class="avatar">A</div><h4>Allison Pinto</h4><div class="role">Integrante</div></div>
         </div>
 
         <div style="margin-top: 3rem; text-align: center;">
@@ -879,25 +428,19 @@
             </div>
         </div>
 
-        <!-- Tarjeta de Información del Colegio -->
         <div class="school-card">
             <h3>Información Institucional</h3>
             <div class="school-name">Colegio Nuestra Señora de Bethlem</div>
             <div class="grade">Grado: 11° A</div>
             <div class="event">Feria Científica 2026</div>
-            <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">
-                Proyecto: Influencia de la frecuencia de excitación en la formación de figuras de Chladni.
-            </p>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>Proyecto de Investigación: Influencia de la frecuencia de excitación en la formación de figuras de Chladni.</p>
         <p style="margin-top: 0.5rem;">&copy; 2026 - Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Botón flotante de audio -->
     <button id="audio-toggle" class="audio-btn" aria-label="Activar sonido ambiente">
         <svg id="icon-unmuted" class="audio-icon hidden" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -910,14 +453,11 @@
         </svg>
     </button>
 
-    <!-- Audio de ambiente (streaming) -->
     <audio id="ambient-audio" loop preload="auto" crossorigin="anonymous">
         <source src="https://archive.org/download/stasis009/02_Satellite.mp3" type="audio/mpeg">
         <source src="https://archive.org/download/stasis009/03_Galaxies.mp3" type="audio/mpeg">
-        Tu navegador no soporta audio HTML5.
     </audio>
 
-    <!-- Lightbox para imágenes y videos -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="close-lightbox">&times;</span>
         <img src="" alt="Imagen ampliada" id="lightbox-img">
@@ -925,102 +465,114 @@
     </div>
 
     <script>
-        // --- Menú Hamburguesa ---
+        // --- Menú ---
         const menuToggle = document.getElementById('menu-toggle');
         const navLinks = document.getElementById('nav-links');
-        
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
+        menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
         navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
         });
 
         // --- Acordeón ---
         document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const accordion = header.parentElement;
-                accordion.classList.toggle('active');
-            });
+            header.addEventListener('click', () => header.parentElement.classList.toggle('active'));
         });
 
-        // --- Lightbox para Imágenes y Videos ---
+        // --- Lightbox ---
         function openLightbox(src, type) {
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
             const video = document.getElementById('lightbox-video');
-            
             if (type === 'video') {
                 img.style.display = 'none';
                 video.style.display = 'block';
                 video.src = src;
                 video.play();
             } else {
-                video.pause();
-                video.src = '';
-                video.style.display = 'none';
-                img.style.display = 'block';
-                img.src = src;
+                video.pause(); video.src = ''; video.style.display = 'none';
+                img.style.display = 'block'; img.src = src;
             }
             lightbox.classList.add('active');
         }
-
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
             const video = document.getElementById('lightbox-video');
-            video.pause();
-            video.src = '';
+            video.pause(); video.src = '';
             lightbox.classList.remove('active');
         }
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLightbox();
-        });
-
-        // --- Animaciones al hacer scroll (IntersectionObserver) ---
+        // --- Animaciones al hacer scroll (Secciones) ---
         const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // --- FADE IN INDIVIDUAL DE TARJETAS (solo una vez) ---
+        const cardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    cardObserver.unobserve(entry.target); // Solo una vez
                 }
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
+        document.querySelectorAll('.gallery-item, .video-item, .team-card, .analysis-card, .accordion, .school-card').forEach((el, i) => {
+            el.classList.add('card-fade');
+            // Delay escalonado para efecto cascada
+            el.style.transitionDelay = `${(i % 6) * 0.08}s`;
+            cardObserver.observe(el);
         });
 
-        // --- VIDEO AUTOPLAY EN BUCLE (IntersectionObserver) ---
+        // --- CONTROL DE VIDEOS: UNO A LA VEZ + AUTO-AVANCE ---
+        const allVideos = document.querySelectorAll('.video-item video');
+
+        function playOnly(video) {
+            // Pausar todos los demás
+            allVideos.forEach(v => { if (v !== video) v.pause(); });
+            // Reproducir este
+            if (video.ended) video.currentTime = 0;
+            video.play().catch(e => console.log('Play error:', e));
+        }
+
         const videoObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const video = entry.target.querySelector('video');
-                if (video) {
-                    if (entry.isIntersecting) {
-                        video.play().catch(e => console.log("Autoplay blocked:", e));
-                    } else {
-                        video.pause();
+                if (!video) return;
+                if (entry.isIntersecting) {
+                    // Solo reproducir si no hay otro reproduciéndose actualmente
+                    const anyPlaying = Array.from(allVideos).some(v => !v.paused && v !== video);
+                    if (!anyPlaying) {
+                        playOnly(video);
                     }
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.6 });
 
-        document.querySelectorAll('.video-item.autoplay').forEach(item => {
-            videoObserver.observe(item);
+        document.querySelectorAll('.video-item').forEach(item => videoObserver.observe(item));
+
+        // Auto-avance al terminar
+        allVideos.forEach((video, idx) => {
+            video.addEventListener('ended', () => {
+                const next = allVideos[idx + 1];
+                if (next) {
+                    playOnly(next);
+                }
+            });
         });
 
-        // --- CONTROL DE AUDIO ---
+        // --- AUDIO DE AMBIENTE ---
         const audioBtn = document.getElementById('audio-toggle');
         const ambientAudio = document.getElementById('ambient-audio');
         const iconUnmuted = document.getElementById('icon-unmuted');
         const iconMuted = document.getElementById('icon-muted');
-
         let isPlaying = false;
         let fadeInterval = null;
-        const FADE_DURATION = 3000; 
-        const START_TIME = 8; 
+        const FADE_DURATION = 3000;
+        const START_TIME = 8;
 
         function fadeIn() {
             clearInterval(fadeInterval);
@@ -1044,40 +596,22 @@
                 clearInterval(fadeInterval);
                 iconUnmuted.classList.add('hidden');
                 iconMuted.classList.remove('hidden');
-                audioBtn.setAttribute('aria-label', 'Activar sonido ambiente');
                 isPlaying = false;
             } else {
-                try {
-                    if (ambientAudio.readyState >= 1) {
-                        ambientAudio.currentTime = START_TIME;
-                    }
-                } catch (e) {
-                    console.log("No se pudo establecer el tiempo de inicio:", e);
-                }
-
+                try { if (ambientAudio.readyState >= 1) ambientAudio.currentTime = START_TIME; } catch (e) {}
                 ambientAudio.play().then(() => {
                     fadeIn();
                     iconMuted.classList.add('hidden');
                     iconUnmuted.classList.remove('hidden');
-                    audioBtn.setAttribute('aria-label', 'Silenciar sonido ambiente');
                     isPlaying = true;
-                }).catch(error => {
-                    console.log('Error al reproducir audio:', error);
-                    ambientAudio.play().then(() => {
-                        fadeIn();
-                        iconMuted.classList.add('hidden');
-                        iconUnmuted.classList.remove('hidden');
-                        audioBtn.setAttribute('aria-label', 'Silenciar sonido ambiente');
-                        isPlaying = true;
-                    }).catch(e => console.log('Error fatal de audio:', e));
-                });
+                }).catch(e => console.log('Audio error:', e));
             }
         });
 
         iconUnmuted.classList.add('hidden');
         iconMuted.classList.remove('hidden');
 
-        // --- Animación de fondo pasiva (Ondas Low Poly) ---
+        // --- ONDAS DE FONDO ---
         const canvasLeft = document.getElementById('wave-canvas-left');
         const canvasRight = document.getElementById('wave-canvas-right');
         const ctxLeft = canvasLeft.getContext('2d');
@@ -1085,41 +619,34 @@
 
         let waveWidth = 80;
         let waveHeight = window.innerHeight;
-        
+
         function resizeCanvases() {
             waveWidth = window.innerWidth < 768 ? 40 : 80;
             waveHeight = window.innerHeight;
-            canvasLeft.width = waveWidth;
-            canvasLeft.height = waveHeight;
-            canvasRight.width = waveWidth;
-            canvasRight.height = waveHeight;
+            canvasLeft.width = waveWidth; canvasLeft.height = waveHeight;
+            canvasRight.width = waveWidth; canvasRight.height = waveHeight;
         }
         window.addEventListener('resize', resizeCanvases);
         resizeCanvases();
 
         let time = 0;
-        const gridSize = 6; 
+        const gridSize = 6;
 
         function drawWaves() {
-            time += 0.008; 
+            time += 0.008;
             ctxLeft.clearRect(0, 0, waveWidth, waveHeight);
             ctxRight.clearRect(0, 0, waveWidth, waveHeight);
-
             ctxLeft.fillStyle = 'rgba(44, 62, 80, 0.15)';
             ctxRight.fillStyle = 'rgba(44, 62, 80, 0.15)';
 
             for (let y = 0; y < waveHeight; y += gridSize) {
                 let amp = 20 + Math.sin(y * 0.01 + time) * 15 + Math.sin(y * 0.02 + time * 0.5) * 5;
                 let numBlocks = Math.floor(amp / gridSize);
-                
                 for (let i = 0; i < numBlocks; i++) {
-                    let x = i * gridSize;
-                    ctxLeft.fillRect(x, y, gridSize - 1, gridSize - 1);
+                    ctxLeft.fillRect(i * gridSize, y, gridSize - 1, gridSize - 1);
                 }
-                
                 for (let i = 0; i < numBlocks; i++) {
-                    let x = waveWidth - (i + 1) * gridSize;
-                    ctxRight.fillRect(x, y, gridSize - 1, gridSize - 1);
+                    ctxRight.fillRect(waveWidth - (i + 1) * gridSize, y, gridSize - 1, gridSize - 1);
                 }
             }
             requestAnimationFrame(drawWaves);
