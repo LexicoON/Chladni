@@ -28,7 +28,20 @@
             line-height: 1.6;
             color: var(--text);
             background-color: var(--light);
+            overflow-x: hidden;
         }
+
+        /* --- Canvas para las ondas laterales --- */
+        .wave-canvas {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 100px; /* Ancho del área de la onda */
+            pointer-events: none;
+            z-index: 900; /* Debajo de la navegación, encima del fondo */
+        }
+        .wave-canvas.left { left: 0; }
+        .wave-canvas.right { right: 0; }
 
         /* Navegación */
         nav {
@@ -49,6 +62,15 @@
             font-weight: 700;
             font-size: 1.2rem;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--secondary);
         }
 
         .nav-links {
@@ -67,7 +89,7 @@
             color: var(--secondary);
         }
 
-        /* Hero Section */
+        /* Hero Section con imagen de fondo desde URL */
         header {
             height: 100vh;
             display: flex;
@@ -76,21 +98,38 @@
             align-items: center;
             text-align: center;
             padding: 2rem;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             position: relative;
-            overflow: hidden;
+            background: url('https://as2.ftcdn.net/jpg/00/54/01/81/1000_F_54018129_UYnlnkzw0gNOedKTMlSUfWnHlt71J9Ud.jpg') center/cover no-repeat;
+            background-attachment: fixed;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(244, 247, 246, 0.92) 0%, rgba(195, 207, 226, 0.88) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         header h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             color: var(--primary);
             margin-bottom: 1rem;
             animation: fadeInDown 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         header p {
             font-size: 1.2rem;
-            color: var(--text-light);
+            color: var(--text);
             max-width: 700px;
             margin-bottom: 2rem;
             animation: fadeInUp 1s ease 0.3s both;
@@ -230,6 +269,95 @@
             pointer-events: none;
         }
 
+        /* Sección de Equipo Rediseñada */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .team-card .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .team-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+
+        .team-card .role {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .team-card .info {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Sección de Análisis */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .analysis-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary);
+            transition: transform 0.3s;
+        }
+
+        .analysis-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .analysis-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .analysis-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
         /* Botón flotante de audio */
         .audio-btn {
             position: fixed;
@@ -320,7 +448,19 @@
             color: var(--secondary);
         }
 
-        /* Animaciones */
+        /* --- Animaciones Pasivas (Scroll Reveal) --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animaciones de entrada para el Hero */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -333,36 +473,49 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            header h1 { font-size: 2.2rem; }
+            header h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
             section { padding: 3rem 1rem; }
             .gallery { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+            .team-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+            .wave-canvas { width: 60px; } /* Ondas más delgadas en móvil */
         }
     </style>
 </head>
 <body>
 
+    <!-- Ondas laterales reactivas -->
+    <canvas id="left-canvas" class="wave-canvas left"></canvas>
+    <canvas id="right-canvas" class="wave-canvas right"></canvas>
+
     <!-- Navegación -->
     <nav>
-        <div class="logo">🔬 Figuras de Chladni</div>
+        <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s2-4 6-4 6 4 6 4 2 4 6 4 6-4 6-4"></path>
+            </svg>
+            Figuras de Chladni
+        </div>
         <div class="nav-links">
             <a href="#inicio">Inicio</a>
             <a href="#definiciones">Definiciones</a>
             <a href="#galeria">Galería</a>
-            <a href="#resultados">Resultados</a>
+            <a href="#analisis">Análisis</a>
             <a href="#equipo">Equipo</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <header id="inicio">
-        <h1>El Arte de las Ondas</h1>
-        <p>Descubre cómo el sonido y la vibración dan forma a patrones geométricos increíbles. Un proyecto de investigación sobre las Figuras de Chladni y las ondas estacionarias.</p>
-        <a href="#definiciones" class="btn">Comenzar a Explorar</a>
+        <div class="hero-content">
+            <h1>El Arte de las Ondas</h1>
+            <p>Descubre cómo el sonido y la vibración dan forma a patrones geométricos increíbles. Un proyecto de investigación sobre las Figuras de Chladni y las ondas estacionarias.</p>
+            <a href="#definiciones" class="btn">Comenzar a Explorar</a>
+        </div>
     </header>
 
     <!-- Sección de Definiciones -->
-    <section id="definiciones">
+    <section id="definiciones" class="animate-on-scroll">
         <h2>¿Qué son las Figuras de Chladni?</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light);">
             Las figuras de Chladni son patrones que se forman cuando una superficie vibra a ciertas frecuencias. La arena se acumula en las líneas nodales (donde no hay vibración), revelando la geometría del sonido.
@@ -420,7 +573,7 @@
     </section>
 
     <!-- Sección de Galería -->
-    <section id="galeria">
+    <section id="galeria" class="animate-on-scroll">
         <h2>Galería Multimedia</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light);">
             Explora nuestro proceso, el prototipo y los patrones que logramos capturar.
@@ -552,51 +705,85 @@
         </div>
     </section>
 
-    <!-- Sección de Resultados Escritos -->
-    <section id="resultados">
-        <h2>Resultados del Experimento</h2>
+    <!-- Sección de Análisis -->
+    <section id="analisis" class="animate-on-scroll">
+        <h2>Análisis de los Resultados</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light);">
-            Utilizamos una placa de metal de 30x30 cm y arena fina, variando la frecuencia de 89 Hz a 1125 Hz.
+            A partir de los resultados obtenidos, se analizó el comportamiento de las partículas de arena frente a las diferentes condiciones de vibración.
         </p>
 
-        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <div class="resultado-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                <div style="padding: 1.5rem;">
-                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Frecuencias Bajas (89 - 196 Hz)</h4>
-                    <p>Se forma un círculo perfecto y bien marcado alrededor del centro de la placa.</p>
-                </div>
+        <div class="analysis-grid">
+            <div class="analysis-card">
+                <h4>1. Relación entre la frecuencia y los patrones</h4>
+                <p>Los resultados evidenciaron que la modificación de la frecuencia produce cambios en la configuración de los patrones. Al variar la frecuencia, la placa puede responder mediante diferentes modos normales de vibración, cada uno con una distribución particular de nodos y antinodos.</p>
             </div>
-            <div class="resultado-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                <div style="padding: 1.5rem;">
-                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Frecuencias Medias (208 - 398 Hz)</h4>
-                    <p>El patrón evoluciona incorporando arcos y medias lunas cerca de las esquinas.</p>
-                </div>
+            <div class="analysis-card">
+                <h4>2. Distribución y formación de los patrones</h4>
+                <p>La forma de los patrones está relacionada con la manera en que se distribuyen los nodos sobre la superficie. La arena permite identificar estas regiones porque se desplaza de las zonas de mayor amplitud hasta concentrarse en las líneas nodales.</p>
             </div>
-            <div class="resultado-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                <div style="padding: 1.5rem;">
-                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Frecuencias Altas (470 - 1125 Hz)</h4>
-                    <p>Emergen múltiples círculos concéntricos y líneas nodales más finas y apretadas.</p>
-                </div>
+            <div class="analysis-card">
+                <h4>3. Influencia de la posición de la fuente</h4>
+                <p>El punto donde se aplica la fuerza influye en la cantidad de energía que recibe cada modo normal. En este caso, la fuente se encontraba ubicada en el centro de la placa, lo que favoreció la aparición de patrones con una distribución relativamente simétrica.</p>
+            </div>
+            <div class="analysis-card">
+                <h4>4. Discusión y predicción</h4>
+                <p>La frecuencia permite establecer qué modos de vibración pueden aparecer, mientras que la posición de excitación influye en cuáles de estos modos reciben mayor cantidad de energía. Sin embargo, predecir con exactitud la figura final resulta más complejo debido a las condiciones reales del sistema.</p>
             </div>
         </div>
     </section>
 
     <!-- Sección de Equipo -->
-    <section id="equipo">
+    <section id="equipo" class="animate-on-scroll">
         <h2>Nuestro Equipo</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-            <div class="card" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Integrantes</h3>
-                <p>Ana Lucía Carazo, Kasey de León, Alexis Batista, José Almario, Diana Moreno, José Pinto y Allison Pinto.</p>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="avatar">A</div>
+                <h4>Ana Lucía Carazo</h4>
+                <div class="role">Investigadora</div>
             </div>
-            <div class="card" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Asesor</h3>
-                <p>Tomás Torres</p>
+            <div class="team-card">
+                <div class="avatar">K</div>
+                <h4>Kasey de León</h4>
+                <div class="role">Investigadora</div>
             </div>
-            <div class="card" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Institución</h3>
-                <p>Colegio Nuestra Señora de Bethlem<br>11° A<br>26 de agosto de 2026</p>
+            <div class="team-card">
+                <div class="avatar">A</div>
+                <h4>Alexis Batista</h4>
+                <div class="role">Investigador</div>
             </div>
+            <div class="team-card">
+                <div class="avatar">J</div>
+                <h4>José Almario</h4>
+                <div class="role">Investigador</div>
+            </div>
+            <div class="team-card">
+                <div class="avatar">D</div>
+                <h4>Diana Moreno</h4>
+                <div class="role">Investigadora</div>
+            </div>
+            <div class="team-card">
+                <div class="avatar">J</div>
+                <h4>José Pinto</h4>
+                <div class="role">Investigador</div>
+            </div>
+            <div class="team-card">
+                <div class="avatar">A</div>
+                <h4>Allison Pinto</h4>
+                <div class="role">Investigadora</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; text-align: center;">
+            <div class="team-card" style="display: inline-block; min-width: 280px;">
+                <div class="avatar" style="background: var(--primary);">TT</div>
+                <h4>Tomás Torres</h4>
+                <div class="role">Asesor</div>
+                <p class="info">Colegio Nuestra Señora de Bethlem</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center; color: var(--text-light);">
+            <p><strong>Grado:</strong> 11° A &nbsp;|&nbsp; <strong>Fecha:</strong> 26 de agosto de 2026</p>
         </div>
     </section>
 
@@ -622,7 +809,7 @@
     <!-- Audio de ambiente (streaming) -->
     <audio id="ambient-audio" loop preload="none">
         <source src="https://archive.org/download/stasis009/02_Satellite.mp3" type="audio/mpeg">
-        <source src="https://archive.org/download/stasis009/03_Galaxies.mp3" type="audio/mpeg">
+        <source src="https://archive.org/details/stasis009/03_Galaxies.mp3" type="audio/mpeg">
         Tu navegador no soporta audio HTML5.
     </audio>
 
@@ -633,7 +820,7 @@
     </div>
 
     <script>
-        // Acordeón
+        // --- Acordeón ---
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', () => {
                 const accordion = header.parentElement;
@@ -641,7 +828,7 @@
             });
         });
 
-        // Lightbox para imágenes
+        // --- Lightbox para imágenes ---
         function openLightbox(src) {
             document.getElementById('lightbox-img').src = src;
             document.getElementById('lightbox').classList.add('active');
@@ -651,12 +838,24 @@
             document.getElementById('lightbox').classList.remove('active');
         }
 
-        // Cerrar lightbox con tecla ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
         });
 
-        // --- Control de audio con salto y fade-in ---
+        // --- Animaciones al hacer scroll (IntersectionObserver) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- CONTROL DE AUDIO Y ANALIZADOR ---
         const audioBtn = document.getElementById('audio-toggle');
         const ambientAudio = document.getElementById('ambient-audio');
         const iconUnmuted = document.getElementById('icon-unmuted');
@@ -666,6 +865,25 @@
         let fadeInterval = null;
         const FADE_DURATION = 3000; // 3 segundos de fade-in
         const START_TIME = 8; // Saltar los primeros 8 segundos
+        
+        // Variables para el análisis de audio
+        let audioCtx, analyser, dataArray;
+        let audioAmp = 0;
+
+        function initAudioAnalyser(audioElement) {
+            if (analyser) return; // Ya está inicializado
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioCtx.createAnalyser();
+                const source = audioCtx.createMediaElementSource(audioElement);
+                source.connect(analyser);
+                analyser.connect(audioCtx.destination);
+                analyser.fftSize = 256;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+            } catch (e) {
+                console.log("Error al inicializar el analizador de audio:", e);
+            }
+        }
 
         function fadeIn() {
             clearInterval(fadeInterval);
@@ -683,18 +901,22 @@
 
         audioBtn.addEventListener('click', () => {
             if (isPlaying) {
-                // Apagar
                 ambientAudio.pause();
                 ambientAudio.currentTime = 0;
-                ambientAudio.volume = 1; // Resetear volumen
+                ambientAudio.volume = 1;
                 clearInterval(fadeInterval);
                 iconUnmuted.classList.add('hidden');
                 iconMuted.classList.remove('hidden');
                 audioBtn.setAttribute('aria-label', 'Activar sonido ambiente');
                 isPlaying = false;
             } else {
-                // Encender
-                if (ambientAudio.readyState >= 1) { // Si ya hay metadatos
+                // Inicializar el analizador de audio en el primer clic
+                initAudioAnalyser(ambientAudio);
+                if (audioCtx && audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                if (ambientAudio.readyState >= 1) {
                     ambientAudio.currentTime = START_TIME;
                 }
                 ambientAudio.play().then(() => {
@@ -705,7 +927,6 @@
                     isPlaying = true;
                 }).catch(error => {
                     console.log('Error al reproducir audio:', error);
-                    // Fallback: intentar sin saltar
                     ambientAudio.play().then(() => {
                         fadeIn();
                         iconMuted.classList.add('hidden');
@@ -717,9 +938,111 @@
             }
         });
 
-        // Inicialmente mostrar el icono de silencio
         iconUnmuted.classList.add('hidden');
         iconMuted.classList.remove('hidden');
+
+        // --- ANIMACIÓN DE ONDAS LATERALES REACTIVAS ---
+        const canvasLeft = document.getElementById('left-canvas');
+        const canvasRight = document.getElementById('right-canvas');
+        const ctxLeft = canvasLeft.getContext('2d');
+        const ctxRight = canvasRight.getContext('2d');
+
+        let width = 100;
+        let height = window.innerHeight;
+        
+        function resizeCanvases() {
+            width = window.innerWidth < 768 ? 60 : 100;
+            height = window.innerHeight;
+            canvasLeft.width = width;
+            canvasLeft.height = height;
+            canvasRight.width = width;
+            canvasRight.height = height;
+            generateBaseWave();
+        }
+        window.addEventListener('resize', resizeCanvases);
+        resizeCanvases();
+
+        // Parámetros de la onda
+        const gridSize = 8; // Tamaño de los cuadraditos
+        const thickness = 16; // Grosor de la banda de arena (2 cuadraditos)
+        const maxAmp = 65; // Amplitud máxima de la onda
+
+        let scrollVelocity = 0;
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            const delta = Math.abs(window.scrollY - lastScrollY);
+            scrollVelocity += delta * 0.5;
+            lastScrollY = window.scrollY;
+        });
+
+        // Generar la forma base de la onda (un pulso central con rizos)
+        let baseWave = [];
+        function generateBaseWave() {
+            baseWave = [];
+            const rows = Math.floor(height / gridSize);
+            for (let i = 0; i < rows; i++) {
+                const t = i / rows; // 0 a 1
+                // Forma de paquete de ondas (Stranger Things vibe)
+                const pulse = Math.exp(-Math.pow((t - 0.5) * 4, 2)); 
+                const ripple = 0.5 + 0.5 * Math.sin(t * Math.PI * 20);
+                const waveValue = pulse * ripple;
+                baseWave.push(10 + waveValue * maxAmp);
+            }
+        }
+
+        function drawWaves() {
+            // Decaimiento del impulso del scroll
+            scrollVelocity *= 0.92;
+
+            // Obtener amplitud del audio
+            if (analyser && dataArray) {
+                analyser.getByteFrequencyData(dataArray);
+                const sum = dataArray.reduce((a, b) => a + b, 0);
+                const avg = sum / dataArray.length;
+                audioAmp = avg / 255; // Normalizado 0-1
+            } else {
+                audioAmp = 0;
+            }
+
+            // Limpiar canvases
+            ctxLeft.clearRect(0, 0, width, height);
+            ctxRight.clearRect(0, 0, width, height);
+
+            ctxLeft.fillStyle = '#1A252F'; // Azul oscuro / Negro
+            ctxRight.fillStyle = '#1A252F';
+
+            for (let i = 0; i < baseWave.length; i++) {
+                const y = i * gridSize;
+                
+                // El desplazamiento objetivo depende de la onda base, el audio y el scroll
+                const audioFactor = 1 + (audioAmp * 1.8); // Reacciona a la música
+                const scrollFactor = 1 + (scrollVelocity * 0.03); // Reacciona al scroll
+                let targetDisp = baseWave[i] * audioFactor * scrollFactor;
+                
+                // Asegurar que no se salga del canvas
+                targetDisp = Math.min(targetDisp, width - gridSize);
+
+                // Dibujar onda izquierda (picos hacia la derecha)
+                for (let x = targetDisp; x < targetDisp + thickness; x += gridSize) {
+                    if (x < width && Math.random() > 0.1) { // Aleatoriedad para efecto arena
+                        ctxLeft.fillRect(x, y, gridSize - 1, gridSize - 1);
+                    }
+                }
+
+                // Dibujar onda derecha (picos hacia la izquierda)
+                for (let x = width - targetDisp - thickness; x < width - targetDisp; x += gridSize) {
+                    if (x >= 0 && Math.random() > 0.1) {
+                        ctxRight.fillRect(x, y, gridSize - 1, gridSize - 1);
+                    }
+                }
+            }
+
+            requestAnimationFrame(drawWaves);
+        }
+
+        // Iniciar animación
+        drawWaves();
     </script>
 </body>
 </html>
