@@ -29,16 +29,17 @@
             color: var(--text);
             background-color: var(--light);
             overflow-x: hidden;
+            width: 100%;
         }
 
-        /* --- Canvas para las ondas laterales --- */
+        /* --- Animación de fondo pasiva (Ondas Low Poly) --- */
         .wave-canvas {
             position: fixed;
             top: 0;
             height: 100vh;
-            width: 100px; /* Ancho del área de la onda */
+            width: 80px;
+            z-index: -1;
             pointer-events: none;
-            z-index: 900; /* Debajo de la navegación, encima del fondo */
         }
         .wave-canvas.left { left: 0; }
         .wave-canvas.right { right: 0; }
@@ -65,6 +66,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            z-index: 1001;
         }
 
         .logo svg {
@@ -87,6 +89,17 @@
 
         .nav-links a:hover {
             color: var(--secondary);
+        }
+
+        /* Menú Hamburguesa para móvil */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+            z-index: 1001;
         }
 
         /* Hero Section con imagen de fondo desde URL */
@@ -117,6 +130,7 @@
         .hero-content {
             position: relative;
             z-index: 2;
+            padding: 0 1rem;
         }
 
         header h1 {
@@ -154,13 +168,13 @@
 
         /* Secciones generales */
         section {
-            padding: 5rem 2rem;
+            padding: 4rem 1rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--primary);
             margin-bottom: 2rem;
             text-align: center;
@@ -220,11 +234,11 @@
             color: white;
         }
 
-        /* Galería adaptada para formato vertical */
+        /* Galería adaptada */
         .gallery-title {
-            margin: 3rem 0 1.5rem;
+            margin: 2rem 0 1rem;
             color: var(--primary);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             border-left: 5px solid var(--secondary);
             padding-left: 1rem;
         }
@@ -236,7 +250,7 @@
             margin-bottom: 3rem;
         }
 
-        /* Ajuste especial para imágenes y videos verticales */
+        /* Ajuste para imágenes y videos */
         .gallery-item, .video-item {
             position: relative;
             border-radius: 15px;
@@ -249,7 +263,7 @@
         .gallery-item img, .video-item video {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Recorta suavemente para llenar el espacio */
+            object-fit: cover;
             transition: transform 0.5s;
         }
 
@@ -272,15 +286,15 @@
         /* Sección de Equipo Rediseñada */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
         .team-card {
             background: white;
             border-radius: 15px;
-            padding: 2rem 1.5rem;
+            padding: 1.5rem 1rem;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s, box-shadow 0.3s;
@@ -292,15 +306,15 @@
         }
 
         .team-card .avatar {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: white;
             font-weight: 700;
         }
@@ -308,12 +322,12 @@
         .team-card h4 {
             color: var(--primary);
             margin-bottom: 0.25rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .team-card .role {
             color: var(--secondary);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -321,7 +335,7 @@
 
         .team-card .info {
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-top: 0.5rem;
         }
 
@@ -471,22 +485,51 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive */
+        /* --- RESPONSIVE (Móvil) --- */
         @media (max-width: 768px) {
-            header h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
+            header h1 { font-size: 2.2rem; }
+            .nav-links { 
+                display: none; 
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .wave-canvas { width: 40px; } /* Ondas más delgadas en móvil */
             section { padding: 3rem 1rem; }
-            .gallery { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-            .team-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-            .wave-canvas { width: 60px; } /* Ondas más delgadas en móvil */
+            
+            /* Galería en 1 columna en móvil */
+            .gallery { 
+                grid-template-columns: 1fr; 
+            }
+            
+            /* Equipo en 2 columnas en móvil */
+            .team-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 1rem;
+            }
+            .team-card { padding: 1rem 0.5rem; }
+            .team-card .avatar { width: 50px; height: 50px; font-size: 1.2rem; }
+            .team-card h4 { font-size: 0.9rem; }
+            .team-card .role { font-size: 0.65rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Ondas laterales reactivas -->
-    <canvas id="left-canvas" class="wave-canvas left"></canvas>
-    <canvas id="right-canvas" class="wave-canvas right"></canvas>
+    <!-- Animación de fondo pasiva -->
+    <canvas id="wave-canvas-left" class="wave-canvas left"></canvas>
+    <canvas id="wave-canvas-right" class="wave-canvas right"></canvas>
 
     <!-- Navegación -->
     <nav>
@@ -496,7 +539,8 @@
             </svg>
             Figuras de Chladni
         </div>
-        <div class="nav-links">
+        <button class="menu-toggle" id="menu-toggle">☰</button>
+        <div class="nav-links" id="nav-links">
             <a href="#inicio">Inicio</a>
             <a href="#definiciones">Definiciones</a>
             <a href="#galeria">Galería</a>
@@ -611,25 +655,25 @@
         <!-- Videos del Equipo -->
         <div class="gallery">
             <div class="video-item">
-                <video controls preload="metadata">
+                <video controls loop muted playsinline>
                     <source src="videos/equipo1.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Trabajo en equipo (1)</div>
             </div>
             <div class="video-item">
-                <video controls preload="metadata">
+                <video controls loop muted playsinline>
                     <source src="videos/equipo2.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Trabajo en equipo (2)</div>
             </div>
             <div class="video-item">
-                <video controls preload="metadata">
+                <video controls loop muted playsinline>
                     <source src="videos/equipo3.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Trabajo en equipo (3)</div>
             </div>
             <div class="video-item">
-                <video controls preload="metadata">
+                <video controls loop muted playsinline>
                     <source src="videos/equipo4.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Trabajo en equipo (4)</div>
@@ -669,10 +713,10 @@
             </div>
         </div>
 
-        <!-- Video del Prototipo -->
+        <!-- Video del Prototipo (Autoplay) -->
         <div class="gallery">
-            <div class="video-item">
-                <video controls preload="metadata">
+            <div class="video-item autoplay">
+                <video loop muted playsinline>
                     <source src="videos/prototipo_final.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Proyecto casi terminado</div>
@@ -688,16 +732,16 @@
             </div>
         </div>
 
-        <!-- Videos de Resultados -->
+        <!-- Videos de Resultados (Autoplay) -->
         <div class="gallery">
-            <div class="video-item">
-                <video controls preload="metadata">
+            <div class="video-item autoplay">
+                <video loop muted playsinline>
                     <source src="videos/resultado1.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Formación de patrón (1)</div>
             </div>
-            <div class="video-item">
-                <video controls preload="metadata">
+            <div class="video-item autoplay">
+                <video loop muted playsinline>
                     <source src="videos/resultado2.mp4" type="video/mp4">
                 </video>
                 <div class="gallery-caption">Formación de patrón (2)</div>
@@ -739,42 +783,42 @@
             <div class="team-card">
                 <div class="avatar">A</div>
                 <h4>Ana Lucía Carazo</h4>
-                <div class="role">Investigadora</div>
+                <div class="role">Integrante</div>
             </div>
             <div class="team-card">
                 <div class="avatar">K</div>
                 <h4>Kasey de León</h4>
-                <div class="role">Investigadora</div>
+                <div class="role">Integrante</div>
             </div>
             <div class="team-card">
                 <div class="avatar">A</div>
                 <h4>Alexis Batista</h4>
-                <div class="role">Investigador</div>
+                <div class="role">Integrante</div>
             </div>
             <div class="team-card">
                 <div class="avatar">J</div>
                 <h4>José Almario</h4>
-                <div class="role">Investigador</div>
+                <div class="role">Integrante</div>
             </div>
             <div class="team-card">
                 <div class="avatar">D</div>
                 <h4>Diana Moreno</h4>
-                <div class="role">Investigadora</div>
+                <div class="role">Integrante</div>
             </div>
             <div class="team-card">
                 <div class="avatar">J</div>
                 <h4>José Pinto</h4>
-                <div class="role">Investigador</div>
+                <div class="role">Integrante</div>
             </div>
             <div class="team-card">
                 <div class="avatar">A</div>
                 <h4>Allison Pinto</h4>
-                <div class="role">Investigadora</div>
+                <div class="role">Integrante</div>
             </div>
         </div>
 
         <div style="margin-top: 3rem; text-align: center;">
-            <div class="team-card" style="display: inline-block; min-width: 280px;">
+            <div class="team-card" style="display: inline-block; min-width: 250px;">
                 <div class="avatar" style="background: var(--primary);">TT</div>
                 <h4>Tomás Torres</h4>
                 <div class="role">Asesor</div>
@@ -807,9 +851,9 @@
     </button>
 
     <!-- Audio de ambiente (streaming) -->
-    <audio id="ambient-audio" loop preload="none">
+    <audio id="ambient-audio" loop preload="auto" crossorigin="anonymous">
         <source src="https://archive.org/download/stasis009/02_Satellite.mp3" type="audio/mpeg">
-        <source src="https://archive.org/details/stasis009/03_Galaxies.mp3" type="audio/mpeg">
+        <source src="https://archive.org/download/stasis009/03_Galaxies.mp3" type="audio/mpeg">
         Tu navegador no soporta audio HTML5.
     </audio>
 
@@ -820,6 +864,21 @@
     </div>
 
     <script>
+        // --- Menú Hamburguesa ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
         // --- Acordeón ---
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', () => {
@@ -855,7 +914,25 @@
             observer.observe(el);
         });
 
-        // --- CONTROL DE AUDIO Y ANALIZADOR ---
+        // --- VIDEO AUTOPLAY EN BUCLE (IntersectionObserver) ---
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target.querySelector('video');
+                if (video) {
+                    if (entry.isIntersecting) {
+                        video.play().catch(e => console.log("Autoplay blocked:", e));
+                    } else {
+                        video.pause();
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.video-item.autoplay').forEach(item => {
+            videoObserver.observe(item);
+        });
+
+        // --- CONTROL DE AUDIO (Corregido) ---
         const audioBtn = document.getElementById('audio-toggle');
         const ambientAudio = document.getElementById('ambient-audio');
         const iconUnmuted = document.getElementById('icon-unmuted');
@@ -865,25 +942,6 @@
         let fadeInterval = null;
         const FADE_DURATION = 3000; // 3 segundos de fade-in
         const START_TIME = 8; // Saltar los primeros 8 segundos
-        
-        // Variables para el análisis de audio
-        let audioCtx, analyser, dataArray;
-        let audioAmp = 0;
-
-        function initAudioAnalyser(audioElement) {
-            if (analyser) return; // Ya está inicializado
-            try {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioCtx.createAnalyser();
-                const source = audioCtx.createMediaElementSource(audioElement);
-                source.connect(analyser);
-                analyser.connect(audioCtx.destination);
-                analyser.fftSize = 256;
-                dataArray = new Uint8Array(analyser.frequencyBinCount);
-            } catch (e) {
-                console.log("Error al inicializar el analizador de audio:", e);
-            }
-        }
 
         function fadeIn() {
             clearInterval(fadeInterval);
@@ -910,15 +968,14 @@
                 audioBtn.setAttribute('aria-label', 'Activar sonido ambiente');
                 isPlaying = false;
             } else {
-                // Inicializar el analizador de audio en el primer clic
-                initAudioAnalyser(ambientAudio);
-                if (audioCtx && audioCtx.state === 'suspended') {
-                    audioCtx.resume();
+                try {
+                    if (ambientAudio.readyState >= 1) {
+                        ambientAudio.currentTime = START_TIME;
+                    }
+                } catch (e) {
+                    console.log("No se pudo establecer el tiempo de inicio:", e);
                 }
 
-                if (ambientAudio.readyState >= 1) {
-                    ambientAudio.currentTime = START_TIME;
-                }
                 ambientAudio.play().then(() => {
                     fadeIn();
                     iconMuted.classList.add('hidden');
@@ -927,6 +984,7 @@
                     isPlaying = true;
                 }).catch(error => {
                     console.log('Error al reproducir audio:', error);
+                    // Fallback: intentar sin saltar
                     ambientAudio.play().then(() => {
                         fadeIn();
                         iconMuted.classList.add('hidden');
@@ -941,107 +999,53 @@
         iconUnmuted.classList.add('hidden');
         iconMuted.classList.remove('hidden');
 
-        // --- ANIMACIÓN DE ONDAS LATERALES REACTIVAS ---
-        const canvasLeft = document.getElementById('left-canvas');
-        const canvasRight = document.getElementById('right-canvas');
+        // --- Animación de fondo pasiva (Ondas Low Poly) ---
+        const canvasLeft = document.getElementById('wave-canvas-left');
+        const canvasRight = document.getElementById('wave-canvas-right');
         const ctxLeft = canvasLeft.getContext('2d');
         const ctxRight = canvasRight.getContext('2d');
 
-        let width = 100;
-        let height = window.innerHeight;
+        let waveWidth = 80;
+        let waveHeight = window.innerHeight;
         
         function resizeCanvases() {
-            width = window.innerWidth < 768 ? 60 : 100;
-            height = window.innerHeight;
-            canvasLeft.width = width;
-            canvasLeft.height = height;
-            canvasRight.width = width;
-            canvasRight.height = height;
-            generateBaseWave();
+            waveWidth = window.innerWidth < 768 ? 40 : 80;
+            waveHeight = window.innerHeight;
+            canvasLeft.width = waveWidth;
+            canvasLeft.height = waveHeight;
+            canvasRight.width = waveWidth;
+            canvasRight.height = waveHeight;
         }
         window.addEventListener('resize', resizeCanvases);
         resizeCanvases();
 
-        // Parámetros de la onda
-        const gridSize = 8; // Tamaño de los cuadraditos
-        const thickness = 16; // Grosor de la banda de arena (2 cuadraditos)
-        const maxAmp = 65; // Amplitud máxima de la onda
-
-        let scrollVelocity = 0;
-        let lastScrollY = window.scrollY;
-
-        window.addEventListener('scroll', () => {
-            const delta = Math.abs(window.scrollY - lastScrollY);
-            scrollVelocity += delta * 0.5;
-            lastScrollY = window.scrollY;
-        });
-
-        // Generar la forma base de la onda (un pulso central con rizos)
-        let baseWave = [];
-        function generateBaseWave() {
-            baseWave = [];
-            const rows = Math.floor(height / gridSize);
-            for (let i = 0; i < rows; i++) {
-                const t = i / rows; // 0 a 1
-                // Forma de paquete de ondas (Stranger Things vibe)
-                const pulse = Math.exp(-Math.pow((t - 0.5) * 4, 2)); 
-                const ripple = 0.5 + 0.5 * Math.sin(t * Math.PI * 20);
-                const waveValue = pulse * ripple;
-                baseWave.push(10 + waveValue * maxAmp);
-            }
-        }
+        let time = 0;
+        const gridSize = 6; // Tamaño de los cuadraditos
 
         function drawWaves() {
-            // Decaimiento del impulso del scroll
-            scrollVelocity *= 0.92;
+            time += 0.04;
+            ctxLeft.clearRect(0, 0, waveWidth, waveHeight);
+            ctxRight.clearRect(0, 0, waveWidth, waveHeight);
 
-            // Obtener amplitud del audio
-            if (analyser && dataArray) {
-                analyser.getByteFrequencyData(dataArray);
-                const sum = dataArray.reduce((a, b) => a + b, 0);
-                const avg = sum / dataArray.length;
-                audioAmp = avg / 255; // Normalizado 0-1
-            } else {
-                audioAmp = 0;
-            }
+            // Color azul oscuro con transparencia para efecto sutil
+            ctxLeft.fillStyle = 'rgba(44, 62, 80, 0.15)';
+            ctxRight.fillStyle = 'rgba(44, 62, 80, 0.15)';
 
-            // Limpiar canvases
-            ctxLeft.clearRect(0, 0, width, height);
-            ctxRight.clearRect(0, 0, width, height);
-
-            ctxLeft.fillStyle = '#1A252F'; // Azul oscuro / Negro
-            ctxRight.fillStyle = '#1A252F';
-
-            for (let i = 0; i < baseWave.length; i++) {
-                const y = i * gridSize;
-                
-                // El desplazamiento objetivo depende de la onda base, el audio y el scroll
-                const audioFactor = 1 + (audioAmp * 1.8); // Reacciona a la música
-                const scrollFactor = 1 + (scrollVelocity * 0.03); // Reacciona al scroll
-                let targetDisp = baseWave[i] * audioFactor * scrollFactor;
-                
-                // Asegurar que no se salga del canvas
-                targetDisp = Math.min(targetDisp, width - gridSize);
-
-                // Dibujar onda izquierda (picos hacia la derecha)
-                for (let x = targetDisp; x < targetDisp + thickness; x += gridSize) {
-                    if (x < width && Math.random() > 0.1) { // Aleatoriedad para efecto arena
-                        ctxLeft.fillRect(x, y, gridSize - 1, gridSize - 1);
-                    }
+            for (let y = 0; y < waveHeight; y += gridSize) {
+                // Onda izquierda
+                let ampLeft = 15 + Math.sin(y * 0.02 + time) * 10 + Math.sin(y * 0.005 + time * 0.5) * 5;
+                for (let x = 0; x < ampLeft; x += gridSize) {
+                    ctxLeft.fillRect(x, y, gridSize - 1, gridSize - 1);
                 }
-
-                // Dibujar onda derecha (picos hacia la izquierda)
-                for (let x = width - targetDisp - thickness; x < width - targetDisp; x += gridSize) {
-                    if (x >= 0 && Math.random() > 0.1) {
-                        ctxRight.fillRect(x, y, gridSize - 1, gridSize - 1);
-                    }
+                
+                // Onda derecha
+                let ampRight = 15 + Math.sin(y * 0.02 + time + 1.5) * 10 + Math.sin(y * 0.005 + time * 0.5 + 1.5) * 5;
+                for (let x = waveWidth - ampRight; x < waveWidth; x += gridSize) {
+                    ctxRight.fillRect(x, y, gridSize - 1, gridSize - 1);
                 }
             }
-
             requestAnimationFrame(drawWaves);
         }
-
-        // Iniciar animación
         drawWaves();
     </script>
 </body>
