@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figuras de Chladni - Proyecto Científico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #3498DB;
+            --accent: #E74C3C;
+            --light: #F4F7F6;
+            --dark: #1A252F;
+            --text: #333;
+            --text-light: #666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        /* Navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Secciones generales */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Acordeón para Definiciones */
+        .accordion {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #f8f9fa;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 1.5rem;
+            background: #fafafa;
+            color: var(--text-light);
+        }
+
+        .accordion.active .accordion-content {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        .accordion.active .accordion-header {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Galería adaptada para formato vertical */
+        .gallery-title {
+            margin: 3rem 0 1.5rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+            border-left: 5px solid var(--secondary);
+            padding-left: 1rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Ajuste especial para imágenes y videos verticales */
+        .gallery-item, .video-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            aspect-ratio: 3/4; /* Proporción vertical */
+            background: #000;
+        }
+
+        .gallery-item img, .video-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Recorta suavemente para llenar el espacio */
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        /* Botón flotante de audio */
+        .audio-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(44, 62, 80, 0.85);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1500;
+        }
+
+        .audio-btn:hover {
+            background: rgba(52, 152, 219, 0.95);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+        }
+
+        .audio-icon {
+            width: 32px;
+            height: 32px;
+            transition: opacity 0.3s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-lightbox:hover {
+            color: var(--secondary);
+        }
+
+        /* Animaciones */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            section { padding: 3rem 1rem; }
+            .gallery { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav>
+        <div class="logo">🔬 Figuras de Chladni</div>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#definiciones">Definiciones</a>
+            <a href="#galeria">Galería</a>
+            <a href="#resultados">Resultados</a>
+            <a href="#equipo">Equipo</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio">
+        <h1>El Arte de las Ondas</h1>
+        <p>Descubre cómo el sonido y la vibración dan forma a patrones geométricos increíbles. Un proyecto de investigación sobre las Figuras de Chladni y las ondas estacionarias.</p>
+        <a href="#definiciones" class="btn">Comenzar a Explorar</a>
+    </header>
+
+    <!-- Sección de Definiciones -->
+    <section id="definiciones">
+        <h2>¿Qué son las Figuras de Chladni?</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light);">
+            Las figuras de Chladni son patrones que se forman cuando una superficie vibra a ciertas frecuencias. La arena se acumula en las líneas nodales (donde no hay vibración), revelando la geometría del sonido.
+        </p>
+
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>1. ¿Qué es una onda y cuáles son sus características?</span>
+                <span>▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Una onda es una perturbación que transporta energía sin transportar materia. Sus características principales son la amplitud, longitud de onda, frecuencia y velocidad de propagación. Se clasifican en mecánicas (como el sonido) y electromagnéticas (como la luz).</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>2. ¿Qué son las ondas estacionarias?</span>
+                <span>▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Son el resultado de la superposición de dos ondas de igual frecuencia y amplitud que viajan en sentidos opuestos. En ellas, el patrón no se desplaza, creando puntos fijos llamados nodos y antinodos.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>3. ¿Qué son los nodos y antinodos?</span>
+                <span>▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Los <strong>nodos</strong> son zonas de vibración nula (donde la arena se acumula). Los <strong>antinodos</strong> son zonas de máxima vibración (donde la arena es expulsada). Esto permite visualizar la onda estacionaria.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>4. ¿Qué es la resonancia?</span>
+                <span>▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Es el aumento de amplitud cuando una fuerza externa coincide con la frecuencia natural del sistema. En las placas de Chladni, al alcanzar la resonancia, se forman patrones geométricos definidos.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>5. ¿Cómo se forman las líneas nodales visibles?</span>
+                <span>▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>La arena se desplaza desde los antinodos (zonas de mayor movimiento) hacia los nodos (zonas de vibración nula), acumulándose en las líneas nodales y revelando la geometría del modo de vibración.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Galería -->
+    <section id="galeria">
+        <h2>Galería Multimedia</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light);">
+            Explora nuestro proceso, el prototipo y los patrones que logramos capturar.
+        </p>
+
+        <!-- 1. Equipo -->
+        <h3 class="gallery-title">👥 Nuestro Equipo en Acción</h3>
+        <div class="gallery">
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo1.jpg')">
+                <img src="images/equipo/equipo1.jpg" alt="Equipo trabajando">
+                <div class="gallery-caption">Trabajando en el montaje</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo2.jpg')">
+                <img src="images/equipo/equipo2.jpg" alt="Usando el taladro">
+                <div class="gallery-caption">Perforando la madera</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo3.jpg')">
+                <img src="images/equipo/equipo3.jpg" alt="Cortando madera">
+                <div class="gallery-caption">Cortando la base</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo4.jpg')">
+                <img src="images/equipo/equipo4.jpg" alt="Trabajando en la calle">
+                <div class="gallery-caption">Ajustes finales en equipo</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo5.jpg')">
+                <img src="images/equipo/equipo5.jpg" alt="Manos serrando">
+                <div class="gallery-caption">Detalle del corte</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/equipo/equipo6.jpg')">
+                <img src="images/equipo/equipo6.jpg" alt="Cargando la madera">
+                <div class="gallery-caption">Preparando los materiales</div>
+            </div>
+        </div>
+
+        <!-- Videos del Equipo -->
+        <div class="gallery">
+            <div class="video-item">
+                <video controls preload="metadata">
+                    <source src="videos/equipo1.mp4" type="video/mp4">
+                </video>
+                <div class="gallery-caption">Trabajo en equipo (1)</div>
+            </div>
+            <div class="video-item">
+                <video controls preload="metadata">
+                    <source src="videos/equipo2.mp4" type="video/mp4">
+                </video>
+                <div class="gallery-caption">Trabajo en equipo (2)</div>
+            </div>
+            <div class="video-item">
+                <video controls preload="metadata">
+                    <source src="videos/equipo3.mp4" type="video/mp4">
+                </video>
+                <div class="gallery-caption">Trabajo en equipo (3)</div>
+            </div>
+            <div class="video-item">
+                <video controls preload="metadata">
+                    <source src="videos/equipo4.mp4" type="video/mp4">
+                </video>
+                <div class="gallery-caption">Trabajo en equipo (4)</div>
+            </div>
+        </div>
+
+        <!-- 2. Prototipo -->
+        <h3 class="gallery-title">🔧 Construyendo el Prototipo</h3>
+        <div class="gallery">
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo1.jpg')">
+                <img src="images/prototipo/prototipo1.jpg" alt="Armando subwoofer">
+                <div class="gallery-caption">Ensamblando el subwoofer</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo2.jpg')">
+                <img src="images/prototipo/prototipo2.jpg" alt="Varilla roscada">
+                <div class="gallery-caption">Varillas de sujeción</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo3.jpg')">
+                <img src="images/prototipo/prototipo3.jpg" alt="Tabla de madera">
+                <div class="gallery-caption">Base de madera</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo4.jpg')">
+                <img src="images/prototipo/prototipo4.jpg" alt="Acrílico">
+                <div class="gallery-caption">Lámina de acrílico</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo5.jpg')">
+                <img src="images/prototipo/prototipo5.jpg" alt="Guantes de trabajo">
+                <div class="gallery-caption">Equipo de protección</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo6.jpg')">
+                <img src="images/prototipo/prototipo6.jpg" alt="Montaje lateral">
+                <div class="gallery-caption">Montaje interno</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('images/prototipo/prototipo7.jpg')">
+                <img src="images/prototipo/prototipo7.jpg" alt="Montaje completo">
+                <div class="gallery-caption">Estructura ensamblada</div>
+            </div>
+        </div>
+
+        <!-- Video del Prototipo -->
+        <div class="gallery">
+            <div class="video-item">
+                <video controls preload="metadata">
+                    <source src="videos/prototipo_final.mp4" type="video/mp4">
+                </video>
+                <div class="gallery-caption">Proyecto casi terminado</div>
+            </div>
+        </div>
+
+        <!-- 3. Resultados -->
+        <h3 class="gallery-title">✨ Resultados y Patrones</h3>
+        <div class="gallery">
+            <div class="gallery-item" onclick="openLightbox('images/resultados/resultado1.jpg')">
+                <img src="images/resultados/resultado1.jpg" alt="Placa metálica">
+                <div class="gallery-caption">Placa lista para el experimento</div>
+            </div>
+        </div>
+
+        <!-- Videos de Resultados -->
+        <div class="gallery">
+            <div class="video-item">
+                <video controls preload="metadata">
+                    <source src="videos/resultado1.mp4" type="video/mp4">
+                </video>
+                <div class="gallery-caption">Formación de patrón (1)</div>
+            </div>
+            <div class="video-item">
+                <video controls preload="metadata">
+                    <source src="videos/resultado2.mp4" type="video/mp4">
+                </video>
+                <div class="gallery-caption">Formación de patrón (2)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Resultados Escritos -->
+    <section id="resultados">
+        <h2>Resultados del Experimento</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-light);">
+            Utilizamos una placa de metal de 30x30 cm y arena fina, variando la frecuencia de 89 Hz a 1125 Hz.
+        </p>
+
+        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div class="resultado-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <div style="padding: 1.5rem;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Frecuencias Bajas (89 - 196 Hz)</h4>
+                    <p>Se forma un círculo perfecto y bien marcado alrededor del centro de la placa.</p>
+                </div>
+            </div>
+            <div class="resultado-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <div style="padding: 1.5rem;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Frecuencias Medias (208 - 398 Hz)</h4>
+                    <p>El patrón evoluciona incorporando arcos y medias lunas cerca de las esquinas.</p>
+                </div>
+            </div>
+            <div class="resultado-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <div style="padding: 1.5rem;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Frecuencias Altas (470 - 1125 Hz)</h4>
+                    <p>Emergen múltiples círculos concéntricos y líneas nodales más finas y apretadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Equipo -->
+    <section id="equipo">
+        <h2>Nuestro Equipo</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div class="card" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Integrantes</h3>
+                <p>Ana Lucía Carazo, Kasey de León, Alexis Batista, José Almario, Diana Moreno, José Pinto y Allison Pinto.</p>
+            </div>
+            <div class="card" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Asesor</h3>
+                <p>Tomás Torres</p>
+            </div>
+            <div class="card" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Institución</h3>
+                <p>Colegio Nuestra Señora de Bethlem<br>11° A<br>26 de agosto de 2026</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Proyecto de Investigación: Sistema de visualización vibracional para la detección de alteraciones estructurales mediante figuras de Chladni.</p>
+        <p style="margin-top: 0.5rem;">&copy; 2026 - Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Botón flotante de audio -->
+    <button id="audio-toggle" class="audio-btn" aria-label="Activar sonido de ballenas">
+        <svg id="icon-unmuted" class="audio-icon hidden" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <svg id="icon-muted" class="audio-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+    </button>
+
+    <!-- Audio de ballenas (streaming) -->
+    <audio id="whale-audio" loop preload="none">
+        <source src="https://archive.org/download/WhaleSong_928/whale_song.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
+    </audio>
+
+    <!-- Lightbox para imágenes -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img src="" alt="Imagen ampliada" id="lightbox-img">
+    </div>
+
+    <script>
+        // Acordeón
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const accordion = header.parentElement;
+                accordion.classList.toggle('active');
+            });
+        });
+
+        // Lightbox para imágenes
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Cerrar lightbox con tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Control de audio de ballenas
+        const audioBtn = document.getElementById('audio-toggle');
+        const whaleAudio = document.getElementById('whale-audio');
+        const iconUnmuted = document.getElementById('icon-unmuted');
+        const iconMuted = document.getElementById('icon-muted');
+
+        let isPlaying = false;
+
+        audioBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                whaleAudio.pause();
+                whaleAudio.currentTime = 0;
+                iconUnmuted.classList.add('hidden');
+                iconMuted.classList.remove('hidden');
+                audioBtn.setAttribute('aria-label', 'Activar sonido de ballenas');
+                isPlaying = false;
+            } else {
+                whaleAudio.play().then(() => {
+                    iconMuted.classList.add('hidden');
+                    iconUnmuted.classList.remove('hidden');
+                    audioBtn.setAttribute('aria-label', 'Silenciar sonido de ballenas');
+                    isPlaying = true;
+                }).catch(error => {
+                    console.log('Error al reproducir audio:', error);
+                });
+            }
+        });
+
+        // Inicialmente mostrar el icono de silencio
+        iconUnmuted.classList.add('hidden');
+        iconMuted.classList.remove('hidden');
+    </script>
+</body>
+</html>
